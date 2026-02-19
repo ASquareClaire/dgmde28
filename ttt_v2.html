@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+	a { color: #000000; }
+	body { 
+		font-family:Constantia, "Lucida Bright", "DejaVu Serif", Georgia, "serif"; 
+		text-align: center; 
+	}
+	button { 
+		background: #A41034;
+		border: 2px solid #000000; 
+		border-radius: 5px;
+		color: white;
+		font-size: 25px;
+		padding: 10px;
+	}
+	button:hover { background: #b6b6b6; }
+	h1 { font-weight: bolder; }
+	
+	
+	.board { 
+		border: 5px solid #000000;
+		margin: 20px auto;
+		padding: 30px;
+		width: 330px; 
+	}
+	.square { 
+		border: 2px solid #000000;
+		border-radius: 5px;
+		color: #A41034;
+		display: inline-block; 
+		height: 100px;  
+		font-family:Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif"; 
+		font-size: 60px; 
+		font-weight: 500;
+		line-height: 100px;
+		margin-bottom: 5px; 
+		margin-right: 5px; 
+		max-width: 100px;
+		vertical-align: top;
+		width: 100%;
+	}
+	.square:hover { background: #b6b6b6;}
+	
+	.row { 
+		font-size: 0px;
+		max-width: 600px; 
+		width: 100%; 
+	}
+	.turn {
+		border: 2px solid #000000;
+		border-radius: 5px;
+		color: #A41034;
+		display: inline-block;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+</style>
+	
+<title>ttt_v2.html</title>
+</head>
+
+	
+<body>
+	<h1>Tic Tac Toe Game</h1>
+	<div class="turn"><h2>X's TURN</h2></div>
+	
+<!--	Create board-->
+	<div class="board">
+		<script>
+			const NUM_SQUARES = 9;
+			for (i=0; i<NUM_SQUARES; i++)
+			{
+			id = "sq"+i;
+			document.write( "<div class='square' id='" + id + "'></div>" );
+			}	
+		</script>
+	</div>
+	
+<!--	Place letters in squares-->
+	<script>
+		document.getElementById("sq0").innerHTML = "O";
+		document.getElementById("sq1").innerHTML = "X";
+		document.getElementById("sq7").innerHTML = "X";
+	</script>
+							 
+	<button>Start Game</button>
+	<h2>
+		<a href="https://www.exploratorium.edu/explore/puzzles/tictactoe" target="_blank">Rules</a>
+	</h2>
+</body>
+</html>
+
