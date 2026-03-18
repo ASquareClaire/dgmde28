@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<script>
+		
+		// timesTable
+		function timesTable(number)
+		{
+			for(i = 1; i <= 12; i++)
+			{
+				document.write(number + " x " + i + " = " + (number * i) + "<br>");
+			}
+		}
+		
+		// fahr2cels
+		function fahr2cels(ftemp)
+		{
+			let cels = (ftemp - 32) * 5/9;
+			return cels;
+		}
+	
+	</script> 
+
+	<title>practice</title>
+</head>
+
+<body>
+	<script>
+		document.write("Times Table <br>");
+		let num = prompt("Enter a number:");
+		timesTable(num);
+
+		document.write("<br><br>");
+		
+		document.write("Farenheit --> Celsius Converter <br>");
+		document.write("100 degrees Farenheit = " + fahr2cels(100) + " degrees Celsius <br>");
+		document.write("75 degrees Farenheit = " + fahr2cels(75) + " degrees Celsius <br>");
+		document.write("32 degrees Farenheit = " + fahr2cels(32) + " degrees Celsius <br>");
+		document.write("0 degrees Farenheit = " + fahr2cels(0) + " degrees Celsius <br>");
+	</script>
+</body>
+</html>

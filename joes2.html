@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>joes2</title>
+	
+<script>
+	// Item Class 
+	function Item(name, price)
+	{
+		this.name = name;
+		this.price = price;
+		this.show = function()
+		{
+			return (this.name + ": $" + this.price);
+		}
+	}
+	
+	// Init menu
+	menuItems = 
+	[
+		new Item("Hotdog", 4),
+		new Item("Fries", 3.5),
+		new Item("Soda", 1.5),
+		new Item("Sauerkraut", 1)
+	]
+	
+	// Init empty cart object
+	var cartItems = 
+	{
+		Hotdog: 0,
+		Fries: 0,
+		Soda: 0,
+		Sauerkraut: 0
+	};
+	
+	
+	// Calculate cart & checkout
+	function checkout()
+	{
+		// Calculate final cost of items
+		var totalPrice = 0;
+		var orderTotal = ""
+		for (item in cartItems)
+			if (cartItems[item] > 0)
+				// Get price of item
+				for (order of menuItems)
+				{
+					if (order.name == item)
+					{
+						var itemTotal = cartItems[item] * order.price;
+						totalPrice += itemTotal;
+						orderTotal += cartItems[item] + " " + item + ": $" + itemTotal + "\n";
+					}
+				}
+		orderTotal += "\nOrder Total: $" + totalPrice;	
+		
+		// Display popup with item, quantities, and totals
+		alert(orderTotal);
+					
+		// Clear cart
+		for (item in cartItems)
+			cartItems[item] = 0;
+		displayCart();
+	}
+	
+	
+	// Display cart items
+	function displayCart()
+	{
+		var cart = document.getElementById("cart");
+		var list = "";
+
+		// List items if quantity greater than 0
+		for (item in cartItems)
+			if (cartItems[item] > 0)
+				list += cartItems[item] + " " + item + "<br>";
+		cart.innerHTML = list;
+	}
+
+	
+	function startOrder()
+	{	
+		// Display menu
+		var menu = document.getElementById("menu");
+		menu.innerHTML = "JOE'S MENU" + '<br>' + '<hr>'
+		for (item of menuItems)
+			menu.innerHTML += item.show() + '<br>';
+		
+		// Create selection menu
+		var select = document.getElementById("selectionDiv");
+		var options = "<select id='selectMenu'>";
+		for (item of menuItems)
+			options += "<option>" + item.name + "</option>";
+		options += "</select>"
+		select.innerHTML = options;
+
+		// Add to Cart Button
+		var addBtn = document.getElementById("addBtn");
+		addBtn.onclick = function()
+		{
+			console.log("I got clicked!");
+			// Add item to cart
+			var selectMenu = document.getElementById("selectMenu")
+			var addItem = selectMenu.value;
+			cartItems[addItem] += 1;
+			
+			// Display cart items
+			displayCart(); 
+		}
+		
+		// Checkout Button
+		var checkoutBtn = document.getElementById("checkout");
+		checkoutBtn.onclick = checkout;
+	}
+</script>
+</head>
+
+<body>
+	
+	<div id="menu"></div>
+	<hr><br>
+	<div id="selectionDiv"></div>
+	<br>
+	<button id="addBtn">Add to Cart</button>
+	<br><hr>
+	<div id="cart"></div>
+	<br>
+	<button id="checkout">Checkout</button>
+	
+	<script>
+		startOrder();
+	</script>
+</body>
+</html>

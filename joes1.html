@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>joes1</title>
+	
+<script>
+	// 1. Associative array menu
+	menuArr = [];
+	menuArr['Hotdog'] = 4;
+	menuArr['Fries'] = 3.5;
+	menuArr['Soda'] = 1.5;
+	menuArr['Sauerkraut'] = 1;
+	
+	// Display menu
+	document.write("JOE'S ASSOCIATIVE MENU" + '<br>' + '<hr>');
+	for (key in menuArr)
+		document.write(key + ": $" + menuArr[key] + '<br>');
+	
+	document.write('<br><br>');
+	
+	
+	// 2. Javascript object
+	var menuObj = 
+	{
+		Hotdog: 4,
+		Fries: 3.5,
+		Soda: 1.5,
+		Sauerkraut: 1
+	};
+	
+	// Display menu
+	document.write("JOE'S OBJECTIVE MENU" + '<br>' + '<hr>');
+	for (key in menuObj)
+		document.write(key + ": $" + menuObj[key] + '<br>')
+	
+	document.write('<br><br>');
+	
+	
+	// 3. Class 
+	function Item(name, price)
+	{
+		this.name = name;
+		this.price = price;
+		this.show = function()
+		{
+			document.write(this.name + ": $" + this.price + '<br>');
+		}
+	}
+	
+	menuItems = 
+	[
+		new Item("Hotdog", 4),
+		new Item("Fries", 3.5),
+		new Item("Soda", 1.5),
+		new Item("Sauerkraut", 1)
+	]
+	
+	// Display menu
+	document.write("JOE'S CLASS MENU" + '<br>' + '<hr>');
+	for (item of menuItems)
+		item.show();
+	
+</script>
+</head>
+
+<body>
+</body>
+</html>
