@@ -98,7 +98,7 @@ p {
   gap: 20px;
   box-sizing: border-box;
 }
-#board
+#board, #used-box
 {
   height: fit-content;
   width: fit-content;
@@ -109,7 +109,7 @@ p {
 {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  /* gap: 10px; */
   margin-top: 15px;
   outline: 1px solid #c084fc;
   padding: 15px;
@@ -126,13 +126,23 @@ p {
 {
   width: 150px;
 }
+#message
+{
+  padding-bottom: 15px;
+}
 .letter-box
 {
   height: 60px;
   width: 60px;
+  align-items: center;
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  font-size: large;
+  font-weight: bold;
+  justify-content: center;
   margin: 5px;
   outline: 1px solid #f4f3ec;
-  border-radius: 5px;
 }
 .word-box
 {

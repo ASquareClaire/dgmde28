@@ -46,7 +46,6 @@ export function checkGuess(guess, game) // TODO: Finish this
     // For each letter
     for (var i = 0; i < game.wordLength; i++)
     {
-        // TODO: Put letter in box on board
         var letterBox = document.getElementById(`box-${game.guesses - 1}-${i}`);
         letterBox.textContent = guess[i];
         // Add to guessed alphabet
@@ -54,12 +53,20 @@ export function checkGuess(guess, game) // TODO: Finish this
             game.alphabetGuessed.push(guess[i]);
         // Compare against answer
         if (guess[i] == game.answer[i])
+        {
+            letterBox.style.backgroundColor = '#538d4e';
             result[i] = 'R'; // right letter, right place
+        }
         else if (game.answer.includes(guess[i]))
-            result[i] = 'W'; // right letter, wrong place
+        {
+            letterBox.style.backgroundColor = '#b59f3b';
+            result[i] = 'W'; // right letter, wrong placej
+        }
         else 
-            // Add to used letters
+        {
+            letterBox.style.backgroundColor = 'grey';
             result[i] = 'X'; // wrong letter
+        }
     }
     console.log('Guessed letters: ' + game.alphabetGuessed);
     console.log('result = ' + result);
@@ -76,7 +83,9 @@ export function handleGuess(game)
 
     // If guess is valid
     if (validateGuess(guess, game.wordLength))
+    {
       game.guesses++;
       console.log('Guesses so far: ' + game.guesses);
       checkGuess(guess, game);
+    }
 }

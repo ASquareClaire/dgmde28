@@ -34,6 +34,11 @@ inputBtn.textContent = 'Submit';
 inputBtn.id = 'input-btn';
 inputWrap.appendChild(inputBtn);
 
+// Create Used Letter Board
+const usedBox = document.createElement('div');
+usedBox.id = 'used-box';
+app.appendChild(usedBox)
+
 // Start new game
 function newGame()
 {
