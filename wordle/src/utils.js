@@ -46,6 +46,9 @@ export function checkGuess(guess, game) // TODO: Finish this
     // For each letter
     for (var i = 0; i < game.wordLength; i++)
     {
+        // TODO: Put letter in box on board
+        var letterBox = document.getElementById(`box-${game.guesses - 1}-${i}`);
+        letterBox.textContent = guess[i];
         // Add to guessed alphabet
         if (!game.alphabetGuessed.includes(guess[i]))
             game.alphabetGuessed.push(guess[i]);

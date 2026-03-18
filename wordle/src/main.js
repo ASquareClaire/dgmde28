@@ -52,7 +52,7 @@ function newGame()
     {
       const letterBox = document.createElement('div');
       letterBox.className = 'letter-box';
-      letterBox.id = `box-g${i}-${j}`;
+      letterBox.id = `box-${i}-${j}`;
       wordBox.appendChild(letterBox);
     }
   }
