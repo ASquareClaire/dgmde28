@@ -63,6 +63,7 @@ export function checkGuess(guess, game) // TODO: Finish this
     return result;    
 }
 
+
 // Validate and check guess
 export function handleGuess(game)
 {

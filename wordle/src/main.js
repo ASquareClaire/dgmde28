@@ -1,35 +1,53 @@
 import './style.css'
 import { Game } from './game.js';
-import { checkGuess, handleGuess, validateGuess } from './utils.js';
+import { handleGuess } from './utils.js';
 
 const app = document.getElementById('app');
 // Create board
 const boardDiv = document.createElement('div');
+boardDiv.id = 'board';
 app.appendChild(boardDiv);
 
-// Create input box // TODO: Style this properly
-  var input = document.createElement('input');
-  input.type = 'text';
-  input.id = 'input';
-  input.style.width = '200px';
-  app.appendChild(input);
+// Create input box // TODO: Clean this up
+var inputBox = document.createElement('div');
+inputBox.id = 'input-box';
 
-  // Input buttun // TODO: Clean this up
-  var inputBtn = document.createElement('button');
-  inputBtn.textContent = 'Submit';
-  inputBtn.id = 'input-btn';
-  inputBtn.style.width = '200px';
-  app.appendChild(inputBtn);
+var input = document.createElement('input');
+input.type = 'text';
+input.id = 'input';
+inputBox.appendChild(input);
 
-  // Start new game
+var inputBtn = document.createElement('button');
+inputBtn.textContent = 'Submit';
+inputBtn.id = 'input-btn';
+inputBox.appendChild(inputBtn);
+
+// Start new game
 function newGame()
 {
   // Create new Game
   const game = new Game();
   game.answer = 'TABLE'; // TODO: Hook up API
 
-  boardDiv.innerHTML = 'hi this is a wordle board';
-  
+  // Draw board
+  for (var i = 0; i < game.guessesMax; i++)
+  {
+    const wordBox = document.createElement('div');
+    wordBox.id = `word${i}`;
+    wordBox.className = 'word-box'
+    boardDiv.appendChild(wordBox);
+    for (var j = 0; j < game.wordLength; j++)
+    {
+      const letterBox = document.createElement('div');
+      letterBox.className = 'letter-box';
+      letterBox.id = `box-g${i}-${j}`;
+      wordBox.appendChild(letterBox);
+    }
+  }
+
+  // Add input
+  app.appendChild(inputBox);
+
   // Add input listeners
   input.addEventListener('keydown', (enter) =>
   {
@@ -40,8 +58,6 @@ function newGame()
   {
     handleGuess(game);
   });
-  
-  
 }
-
+console.log('New Game');
 newGame();
