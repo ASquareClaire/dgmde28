@@ -16,6 +16,10 @@ app.appendChild(boardDiv);
 const inputBox = document.createElement('div');
 inputBox.id = 'input-box';
 
+const messageBox = document.createElement('div')
+messageBox.id = 'message';
+inputBox.appendChild(messageBox);
+
 const input = document.createElement('input');
 input.type = 'text';
 input.id = 'input';

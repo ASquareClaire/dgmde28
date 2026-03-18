@@ -13,12 +13,13 @@ export function endGame(win)
 // TODO: Make alert not an alert
 export function validateGuess(guess, wordLen)
 {
+    const messageBox = document.getElementById('message');
     if (guess.length == wordLen && /^[A-Za-z]+$/.test(guess)) // Regex via geeksforgeeks.org
         return true
     else if (guess.length != wordLen)
-        alert('Guess must be exactly 5 letters');
+        messageBox.innerHTML = 'Guess must be exactly 5 letters';
     else 
-        alert('Guess must be letters only');
+        messageBox.innerHTML = 'Guess must be letters only';
     return false
 }
 
