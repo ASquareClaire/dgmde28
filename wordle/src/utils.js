@@ -1,10 +1,10 @@
 // Validate guess length and letters only
 // TODO: Make alert not an alert
-export function validateGuess(guess, letters)
+export function validateGuess(guess, wordLen)
 {
-    if (guess.length == letters && /^[A-Za-z]+$/.test(guess)) // Regex via geeksforgeeks.org
+    if (guess.length == wordLen && /^[A-Za-z]+$/.test(guess)) // Regex via geeksforgeeks.org
         return true
-    else if (guess.length != letters)
+    else if (guess.length != wordLen)
         alert('Guess must be exactly 5 letters');
     else 
         alert('Guess must be letters only');
@@ -20,6 +20,7 @@ export function checkGuess(guess, answer) // TODO: Finish this
     guess = guess.toUpperCase();
     // For each letter, compare against answer
     for (var i = 0; i < answer.length; i++)
+        // TODO: Add to guessed alphabet
         if (guess[i] == answer[i])
             result[i] = 'R'; // right letter, right place
         else if (answer.includes(guess[i]))
