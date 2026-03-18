@@ -1,10 +1,12 @@
 export function endGame(win)
 {
+    // TODO: Display end result in main div
+    const app = document.getElementById('app');
+    app.innerHTML = 'You win!'
     if (win)
         console.log('You win!');
     else
         console.log('You lose!');
-    // TODO: Display end result in main div
 }
 
 // Validate guess length and letters only
@@ -43,10 +45,10 @@ export function checkGuess(guess, game) // TODO: Finish this
 
     // For each letter
     for (var i = 0; i < game.wordLength; i++)
-        // TODO: Add to guessed alphabet
-        if (!game.alphabetGuessed.includes[guess[i]])
+    {
+        // Add to guessed alphabet
+        if (!game.alphabetGuessed.includes(guess[i]))
             game.alphabetGuessed.push(guess[i]);
-        console.log('Guessed letters: ' + game.alphabetGuessed);
         // Compare against answer
         if (guess[i] == game.answer[i])
             result[i] = 'R'; // right letter, right place
@@ -55,6 +57,22 @@ export function checkGuess(guess, game) // TODO: Finish this
         else 
             // Add to used letters
             result[i] = 'X'; // wrong letter
+    }
+    console.log('Guessed letters: ' + game.alphabetGuessed);
     console.log('result = ' + result);
     return result;    
+}
+
+// Validate and check guess
+export function handleGuess(game)
+{
+    const guess = input.value.trim();
+    console.log('Guess: ' + guess);
+    input.value = ''; // Clear input box
+
+    // If guess is valid
+    if (validateGuess(guess, game.wordLength))
+      game.guesses++;
+      console.log('Guesses so far: ' + game.guesses);
+      checkGuess(guess, game);
 }

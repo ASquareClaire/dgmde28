@@ -1,6 +1,6 @@
 import './style.css'
 import { Game } from './game.js';
-import { checkGuess, validateGuess } from './utils.js';
+import { checkGuess, handleGuess, validateGuess } from './utils.js';
 
 const app = document.getElementById('app');
 // Create board
@@ -21,7 +21,7 @@ app.appendChild(boardDiv);
   inputBtn.style.width = '200px';
   app.appendChild(inputBtn);
 
-// Start new game
+  // Start new game
 function newGame()
 {
   // Create new Game
@@ -30,18 +30,18 @@ function newGame()
 
   boardDiv.innerHTML = 'hi this is a wordle board';
   
-  // TODO: Remove input & submit when guessMax reached
-  document.getElementById('input-btn').addEventListener('click', () => {
-    const guess = input.value.trim();
-    console.log('Guess: ' + guess);
-    input.value = ''; // Clear input box
-    // If guess is valid
-    if (validateGuess(guess, game.wordLength))
-      game.guesses++;
-      // TODO: If guesses > 5, endGame(false)
-      console.log('Guesses so far: ' + game.guesses);
-      checkGuess(guess, game);
+  // Add input listeners
+  input.addEventListener('keydown', (enter) =>
+  {
+    if (enter.key === 'Enter')
+      handleGuess(game);
   });
+  inputBtn.addEventListener('click', () => 
+  {
+    handleGuess(game);
+  });
+  
+  
 }
 
 newGame();
