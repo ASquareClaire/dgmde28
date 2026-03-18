@@ -24,26 +24,23 @@ app.appendChild(boardDiv);
 // Start new game
 function newGame()
 {
-  // Game variables // TODO: Make Game object
+  // Create new Game
   const game = new Game();
-  // const WORD_LENGTH = 5;
-  // const GUESSES = 6;
-  // const ALPHABET = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-  // const GUESSED_ALPHABET = []
-  // var answer = 'TABLE'; // TODO: Hook up API
-  // var guesses = 0;
+  var answer = 'TABLE'; // TODO: Hook up API
 
   boardDiv.innerHTML = 'hi this is a wordle board';
   
+  // TODO: Remove input & submit when guessMax reached
   document.getElementById('input-btn').addEventListener('click', () => {
     const guess = input.value.trim();
     console.log(guess);
     input.value = ''; // Clear input box
     // If guess is valid
-    if (validateGuess(guess, WORD_LENGTH))
-      guesses++;
-      console.log('Guesses so far: ' + guesses);
-      checkGuess(guess, answer);
+    if (validateGuess(guess, game.wordLength))
+      game.guesses++;
+      // TODO: If guesses > 5, endGame()
+      console.log('Guesses so far: ' + game.guesses);
+      checkGuess(guess, game);
   });
 }
 

@@ -14,16 +14,16 @@ export function validateGuess(guess, wordLen)
 // R = right letter, right place
 // W = right letter, wrong place
 // X = not in word
-export function checkGuess(guess, answer) // TODO: Finish this
+export function checkGuess(guess, game) // TODO: Finish this
 {
     var result = []
     guess = guess.toUpperCase();
     // For each letter, compare against answer
-    for (var i = 0; i < answer.length; i++)
+    for (var i = 0; i < game.wordLen; i++)
         // TODO: Add to guessed alphabet
-        if (guess[i] == answer[i])
+        if (guess[i] == game.answer[i])
             result[i] = 'R'; // right letter, right place
-        else if (answer.includes(guess[i]))
+        else if (game.answer.includes(guess[i]))
             result[i] = 'W'; // right letter, wrong place
         else 
             // Add to used letters
