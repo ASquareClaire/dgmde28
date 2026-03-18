@@ -38,11 +38,10 @@ function newGame()
     // If guess is valid
     if (validateGuess(guess, game.wordLength))
       game.guesses++;
-      // TODO: If guesses > 5, endGame()
+      // TODO: If guesses > 5, endGame(false)
       console.log('Guesses so far: ' + game.guesses);
       checkGuess(guess, game);
   });
 }
 
 newGame();
-
