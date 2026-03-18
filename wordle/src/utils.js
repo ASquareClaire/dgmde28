@@ -10,7 +10,6 @@ export function endGame(win)
 }
 
 // Validate guess length and letters only
-// TODO: Make alert not an alert
 export function validateGuess(guess, wordLen)
 {
     const messageBox = document.getElementById('message');

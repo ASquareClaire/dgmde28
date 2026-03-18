@@ -20,15 +20,19 @@ const messageBox = document.createElement('div')
 messageBox.id = 'message';
 inputBox.appendChild(messageBox);
 
+const inputWrap = document.createElement('div');
+inputWrap.id = 'input-wrap';
+inputBox.appendChild(inputWrap);
+
 const input = document.createElement('input');
 input.type = 'text';
 input.id = 'input';
-inputBox.appendChild(input);
+inputWrap.appendChild(input);
 
 const inputBtn = document.createElement('button');
 inputBtn.textContent = 'Submit';
 inputBtn.id = 'input-btn';
-inputBox.appendChild(inputBtn);
+inputWrap.appendChild(inputBtn);
 
 // Start new game
 function newGame()

@@ -108,11 +108,18 @@ p {
 #input-box
 {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 10px;
   margin-top: 15px;
   outline: 1px solid #c084fc;
   padding: 15px;
+  width: fit-content;
+}
+#input-wrap
+{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
   width: fit-content;
 }
 #input, #input-btn
