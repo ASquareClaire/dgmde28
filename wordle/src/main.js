@@ -3,21 +3,25 @@ import { Game } from './game.js';
 import { handleGuess } from './utils.js';
 
 const app = document.getElementById('app');
+const titleBox = document.createElement('div');
+titleBox.innerHTML = '<h1>WORDLE</h1>';
+app.appendChild(titleBox);
+
 // Create board
 const boardDiv = document.createElement('div');
 boardDiv.id = 'board';
 app.appendChild(boardDiv);
 
 // Create input box // TODO: Clean this up
-var inputBox = document.createElement('div');
+const inputBox = document.createElement('div');
 inputBox.id = 'input-box';
 
-var input = document.createElement('input');
+const input = document.createElement('input');
 input.type = 'text';
 input.id = 'input';
 inputBox.appendChild(input);
 
-var inputBtn = document.createElement('button');
+const inputBtn = document.createElement('button');
 inputBtn.textContent = 'Submit';
 inputBtn.id = 'input-btn';
 inputBox.appendChild(inputBtn);

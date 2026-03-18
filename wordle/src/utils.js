@@ -1,12 +1,12 @@
 export function endGame(win)
 {
-    // TODO: Display end result in main div
     const app = document.getElementById('app');
-    app.innerHTML = 'You win!'
+    app.removeChild(document.getElementById('input-box'));
+    const board = document.getElementById('board');
     if (win)
-        console.log('You win!');
+        board.innerHTML = '<h2>You win!</h2>';
     else
-        console.log('You lose!');
+        board.innerHTML = '<h2>You lose!</h2>';
 }
 
 // Validate guess length and letters only
