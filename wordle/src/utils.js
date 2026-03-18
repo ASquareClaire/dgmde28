@@ -19,7 +19,7 @@ export function checkGuess(guess, game) // TODO: Finish this
     var result = []
     guess = guess.toUpperCase();
     // For each letter, compare against answer
-    for (var i = 0; i < game.wordLen; i++)
+    for (var i = 0; i < game.wordLength; i++)
         // TODO: Add to guessed alphabet
         if (guess[i] == game.answer[i])
             result[i] = 'R'; // right letter, right place

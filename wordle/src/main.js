@@ -26,14 +26,14 @@ function newGame()
 {
   // Create new Game
   const game = new Game();
-  var answer = 'TABLE'; // TODO: Hook up API
+  game.answer = 'TABLE'; // TODO: Hook up API
 
   boardDiv.innerHTML = 'hi this is a wordle board';
   
   // TODO: Remove input & submit when guessMax reached
   document.getElementById('input-btn').addEventListener('click', () => {
     const guess = input.value.trim();
-    console.log(guess);
+    console.log('Guess: ' + guess);
     input.value = ''; // Clear input box
     // If guess is valid
     if (validateGuess(guess, game.wordLength))
