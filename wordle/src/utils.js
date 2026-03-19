@@ -3,7 +3,6 @@ import { Game } from './game.js';
 export function endGame(game, win)
 {
     const app = document.getElementById('app');
-    //app.removeChild(document.getElementById('input-box'));
     const inputBox = document.getElementById('input-box');
     if (win)
     {
@@ -54,7 +53,7 @@ export function validateGuess(guess, wordLen)
 // R = right letter, right place
 // W = right letter, wrong place
 // X = not in word
-// TODO: Abstract win/lose checks and color boxes?
+// TODO: Abstract color boxes?
 // Check each letter of guess against answer
 export function checkGuess(guess, game)
 {

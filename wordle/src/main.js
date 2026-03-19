@@ -2,7 +2,7 @@ import './style.css'
 import { Player } from './player.js'
 import { newGame } from './utils.js';
 
-// TODO: Add endGame stats to player object
+// TODO: Create Win class? Convert to array with guess stat?
 
 const player = new Player();
 
