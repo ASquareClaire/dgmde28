@@ -112,6 +112,57 @@ export function checkGuess(guess, game) // TODO: Finish this
 }
 
 
+// Create usedKeyboard
+export function createUsedKeyboard(game)
+{
+    // Create Used Letter Div
+    const usedBox = document.createElement('div');
+    usedBox.id = 'used-box';
+
+    for (var i = 0; i < game.usedKeyboard.length; i++)
+    {
+    const row = document.createElement('div');
+    row.className = 'used-letter-row';
+    row.id = `row${i}`;
+    for (var j = 0; j < game.usedKeyboard[i].length; j++)
+    {
+        const letter = document.createElement('div');
+        letter.className = 'used-letter-box';
+        letter.id = `used-${i}-${j}`;
+        letter.textContent = game.usedKeyboard[i][j];
+        row.appendChild(letter);
+    }
+    usedBox.appendChild(row);
+    }
+    return usedBox;
+}
+
+
+// Create Guess Board
+export function createGuessBoard(game)
+{
+    // Create Guess Board
+    const boardDiv = document.createElement('div');
+    boardDiv.id = 'board';
+
+    for (var i = 0; i < game.guessesMax; i++)
+    {
+        const wordBox = document.createElement('div');
+        wordBox.id = `word${i}`;
+        wordBox.className = 'word-box'
+        boardDiv.appendChild(wordBox);
+        for (var j = 0; j < game.wordLength; j++)
+        {
+        const letterBox = document.createElement('div');
+        letterBox.className = 'letter-box';
+        letterBox.id = `box-${i}-${j}`;
+        wordBox.appendChild(letterBox);
+        }
+    }
+    return boardDiv;
+}
+
+
 // Validate and check guess
 export function handleGuess(game)
 {
