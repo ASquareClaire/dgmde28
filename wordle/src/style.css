@@ -105,6 +105,18 @@ p {
   outline: 1px solid #aa3bff;
   padding: 15px;
 }
+.button
+{
+  align-items: center;
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  font-size: large;
+  font-weight: bold;
+  justify-content: center;
+  margin: 5px;
+  outline: 1px solid #f4f3ec;
+}
 #input-box
 {
   display: flex;

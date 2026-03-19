@@ -1,3 +1,5 @@
+import { Game } from './game.js';
+
 export function endGame(game, win)
 {
     const app = document.getElementById('app');
@@ -14,6 +16,10 @@ export function endGame(game, win)
         board.innerHTML = '<h2>You lose!</h2>';
         game.player.totalLosses++;
     }
+    
+    // Create new game btn
+    const newGameBtn = createNewGameBtn(game.player);
+    app.appendChild(newGameBtn);
 }
 
 // Validate guess length and letters only
@@ -200,16 +206,19 @@ export function createInputBox(game)
 
 
 // Create New Game button
-export function createNewGameBtn()
+export function createNewGameBtn(player)
 {
-    const newGameBtn = document.createElement('div');
+    const newGameBtn = document.createElement('button');
     newGameBtn.id = 'new-game-btn';
+    newGameBtn.textContent = 'Start New Game';
 
     // Add listener
     newGameBtn.addEventListener('click', () =>
     {
-        newGame();
+        newGame(player);
     })
+
+    return newGameBtn;
 }
 
 
@@ -258,21 +267,27 @@ export function handleGuess(game)
 // Start new game
 export function newGame(player)
 {
-  console.log('Starting new Game...');
-  
-  // Create new Game
-  const game = new Game(player);
-  game.answer = 'PRIDE'; // TODO: Hook up API
+    console.log('Starting new Game...');
+    
+    // Create new Game
+    const game = new Game(player);
+    game.answer = 'PRIDE'; // TODO: Hook up API
+    const app = document.getElementById('app');
+    app.innerHTML = '';
 
-  // Create board
-  const boardDiv = createGuessBoard(game);
-  app.appendChild(boardDiv);
+    const titleBox = document.createElement('div');
+    titleBox.innerHTML = '<h1>WORDLE</h1>';
+    app.appendChild(titleBox);
 
-  // Add input and used letters
-  const inputBox = createInputBox(game)
-  app.appendChild(inputBox);
+    // Create board
+    const boardDiv = createGuessBoard(game);
+    app.appendChild(boardDiv);
 
-  // Create Used Letter Board
-  const usedBox = createUsedKeyboard(game);
-  app.appendChild(usedBox);
+    // Add input and used letters
+    const inputBox = createInputBox(game)
+    app.appendChild(inputBox);
+
+    // Create Used Letter Board
+    const usedBox = createUsedKeyboard(game);
+    app.appendChild(usedBox);
 }
