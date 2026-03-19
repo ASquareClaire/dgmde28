@@ -13,6 +13,7 @@ export function endGame(win)
 export function validateGuess(guess, wordLen)
 {
     const messageBox = document.getElementById('message');
+    messageBox.innerHTML = '';
     if (guess.length == wordLen && /^[A-Za-z]+$/.test(guess)) // Regex via geeksforgeeks.org
         return true
     else if (guess.length != wordLen)
