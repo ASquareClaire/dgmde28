@@ -20,6 +20,21 @@ export function endGame(game, win)
     // Create new game btn
     const newGameBtn = createNewGameBtn(game.player);
     app.appendChild(newGameBtn);
+
+    // Display player stats
+    const statsDiv = document.createElement('div');
+    statsDiv.id = 'stats-div';
+    app.appendChild(statsDiv);
+    const statsTitle = document.createElement('div');
+    statsTitle.id = 'stats-title';
+    const statsList = document.createElement('div');
+    statsList.id = 'stats-list';
+    statsDiv.appendChild(statsTitle);
+    statsDiv.appendChild(statsList);
+    
+    statsTitle.innerHTML = 'Player Stats';
+    statsList.innerHTML += 'Total Wins: ' + game.player.totalWins + '<br>';
+    statsList.innerHTML += 'Total Losses: ' + game.player.totalLosses + '<br>';
 }
 
 // Validate guess length and letters only
