@@ -38,24 +38,25 @@ inputWrap.appendChild(inputBtn);
 const usedBox = document.createElement('div');
 usedBox.id = 'used-box';
 
-const usedAlphabet = 
+// TODO: Move this to a function, use game.usedKeyboard instead
+const usedKeyboard = 
 [
   ['Q','W','E','R','T','Y','U','I','O','P'],
   ['A','S','D','F','G','H','J','K','L'],
   ['Z','X','C','V','B','N','M']
 ]
 
-for (var i = 0; i < usedAlphabet.length; i++)
+for (var i = 0; i < usedKeyboard.length; i++)
 {
   const row = document.createElement('div');
   row.className = 'used-letter-row';
   row.id = `row${i}`;
-  for (var j = 0; j < usedAlphabet[i].length; j++)
+  for (var j = 0; j < usedKeyboard[i].length; j++)
   {
     const letter = document.createElement('div');
     letter.className = 'used-letter-box';
     letter.id = `used-${i}-${j}`;
-    letter.textContent = usedAlphabet[i][j];
+    letter.textContent = usedKeyboard[i][j];
     row.appendChild(letter);
   }
   usedBox.appendChild(row);
@@ -96,7 +97,7 @@ function newGame()
   });
   inputBtn.addEventListener('click', () => 
   {
-    handleGuess(game, usedAlphabet);
+    handleGuess(game);
   });
 }
 console.log('New Game');

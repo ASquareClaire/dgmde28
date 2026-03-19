@@ -25,7 +25,7 @@ export function validateGuess(guess, wordLen)
 // R = right letter, right place
 // W = right letter, wrong place
 // X = not in word
-export function checkGuess(guess, game, usedAlphabet) // TODO: Finish this
+export function checkGuess(guess, game) // TODO: Finish this
 {
     var result = []
     guess = guess.toUpperCase();
@@ -50,13 +50,14 @@ export function checkGuess(guess, game, usedAlphabet) // TODO: Finish this
         if (!game.alphabetGuessed.includes(guess[i]))
             game.alphabetGuessed.push(guess[i]);
         // Find letterBox on used keyboard
-        for (var k = 0; k < usedAlphabet.length; k++) 
+        var l = -1;
+        for (var k = 0; k < game.usedKeyboard.length; k++) 
         {
-            const l = usedAlphabet[l].indexOf(letter);
+            l = game.usedKeyboard[k].indexOf(guess[i]);
             if (l != -1)
                 break;
         }
-        const usedLetterBox = document.getElementById(`used-${i}-${j}`);
+        const usedLetterBox = document.getElementById(`used-${k}-${l}`);
 
         const letterBox = document.getElementById(`box-${game.guesses - 1}-${i}`);
         letterBox.textContent = guess[i];
@@ -70,12 +71,17 @@ export function checkGuess(guess, game, usedAlphabet) // TODO: Finish this
         }
         else if (game.answer.includes(guess[i]))
         {
+            result[i] = 'W'; // right letter, wrong place
             letterBox.style.backgroundColor = '#b59f3b';
-            result[i] = 'W'; // right letter, wrong placej
+            // TODO: If green, do not overwrite color
+            if (usedLetterBox.style.backgroundColor == '#538d4e')
+                break;
+            usedLetterBox.style.backgroundColor = '#b59f3b';
         }
         else 
         {
             letterBox.style.backgroundColor = 'grey';
+            usedLetterBox.style.backgroundColor = 'grey';
             result[i] = 'X'; // wrong letter
         }
 
