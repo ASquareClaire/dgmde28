@@ -29,6 +29,7 @@ export function checkGuess(guess, game) // TODO: Finish this
 {
     var result = []
     guess = guess.toUpperCase();
+    var answerCopy = game.answer;
     // Check for win
     if (guess == game.answer)
     {
@@ -46,10 +47,10 @@ export function checkGuess(guess, game) // TODO: Finish this
     // For each letter
     for (var i = 0; i < game.wordLength; i++)
     {
-        // Add to guessed alphabet
+        // Add to guessed alphabet // TODO: Delete this if not needed
         if (!game.alphabetGuessed.includes(guess[i]))
             game.alphabetGuessed.push(guess[i]);
-        // Find letterBox on used keyboard
+        // Find letter on used keyboard
         var l = -1;
         for (var k = 0; k < game.usedKeyboard.length; k++) 
         {
@@ -65,32 +66,44 @@ export function checkGuess(guess, game) // TODO: Finish this
         // Compare against answer
         if (guess[i] == game.answer[i])
         {
+            result[i] = 'R'; // right letter, right place
             letterBox.style.backgroundColor = '#538d4e';
             usedLetterBox.style.backgroundColor = '#538d4e';
-            result[i] = 'R'; // right letter, right place
+            usedLetterBox.classList.add('green');
+            // Remove letter from answerCopy letters
+            answerCopy = answerCopy.replace(guess[i], '');
         }
         else if (game.answer.includes(guess[i]))
         {
-            result[i] = 'W'; // right letter, wrong place
-            letterBox.style.backgroundColor = '#b59f3b';
-            // TODO: If green, do not overwrite color
-            if (usedLetterBox.style.backgroundColor == '#538d4e')
-                break;
-            usedLetterBox.style.backgroundColor = '#b59f3b';
+            // If answerCopy still has the letter
+            if (answerCopy.includes(guess[i]))
+            {
+                result[i] = 'W'; // right letter, wrong place
+                letterBox.style.backgroundColor = '#b59f3b';
+                // If already green, do not overwrite color
+                if (!usedLetterBox.classList.contains('green'))
+                    usedLetterBox.style.backgroundColor = '#b59f3b';
+                // Remove letter from answerCopy letters
+                answerCopy = answerCopy.replace(guess[i], '');
+            }  
+            // If duplicate letter is not in answer: wrong letter
+            else
+            {
+                result[i] = 'X'; // wrong letter
+                letterBox.style.backgroundColor = 'grey';
+                // If already green, do not overwrite color
+                if (!usedLetterBox.classList.contains('green'))
+                    usedLetterBox.style.backgroundColor = 'grey';
+            }
+
         }
         else 
         {
+            result[i] = 'X'; // wrong letter
             letterBox.style.backgroundColor = 'grey';
             usedLetterBox.style.backgroundColor = 'grey';
-            result[i] = 'X'; // wrong letter
         }
-
-        // Add to guessed alphabet
-        // if (!game.alphabetGuessed.includes(guess[i]))
-        // {
-        //     game.alphabetGuessed.push(guess[i]);
-        
-        // }
+        console.log('Letter: ' + guess[i], 'answerCopy: ' + answerCopy)
     }
     console.log('Guessed letters: ' + game.alphabetGuessed);
     console.log('result = ' + result);

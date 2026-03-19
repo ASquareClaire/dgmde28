@@ -67,7 +67,7 @@ function newGame()
 {
   // Create new Game
   const game = new Game();
-  game.answer = 'TABLE'; // TODO: Hook up API
+  game.answer = 'PRIDE'; // TODO: Hook up API
 
   // Draw board
   for (var i = 0; i < game.guessesMax; i++)

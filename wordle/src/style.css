@@ -122,6 +122,9 @@ p {
   gap: 10px;
   width: fit-content;
 }
+#input-wrap:empty {
+  display: none;
+}
 #input, #input-btn
 {
   width: 150px;
