@@ -37,7 +37,29 @@ inputWrap.appendChild(inputBtn);
 // Create Used Letter Board
 const usedBox = document.createElement('div');
 usedBox.id = 'used-box';
-app.appendChild(usedBox)
+
+const usedAlphabet = 
+[
+  ['Q','W','E','R','T','Y','U','I','O','P'],
+  ['A','S','D','F','G','H','J','K','L'],
+  ['Z','X','C','V','B','N','M']
+]
+
+for (var i = 0; i < usedAlphabet.length; i++)
+{
+  const row = document.createElement('div');
+  row.className = 'used-letter-row';
+  row.id = `row${i}`;
+  for (var j = 0; j < usedAlphabet[i].length; j++)
+  {
+    const letter = document.createElement('div');
+    letter.className = 'used-letter-box';
+    letter.id = `used-${i}-${j}`;
+    letter.textContent = usedAlphabet[i][j];
+    row.appendChild(letter);
+  }
+  usedBox.appendChild(row);
+}
 
 // Start new game
 function newGame()
@@ -62,8 +84,9 @@ function newGame()
     }
   }
 
-  // Add input
+  // Add input and used letters
   app.appendChild(inputBox);
+  app.appendChild(usedBox);
 
   // Add input listeners
   input.addEventListener('keydown', (enter) =>
@@ -73,7 +96,7 @@ function newGame()
   });
   inputBtn.addEventListener('click', () => 
   {
-    handleGuess(game);
+    handleGuess(game, usedAlphabet);
   });
 }
 console.log('New Game');
