@@ -51,6 +51,7 @@ export function checkGuess(guess, game) // TODO: Finish this
         // Add to guessed alphabet // TODO: Delete this if not needed
         if (!game.alphabetGuessed.includes(guess[i]))
             game.alphabetGuessed.push(guess[i]);
+
         // Find letter on used keyboard
         var l = -1;
         for (var k = 0; k < game.usedKeyboard.length; k++) 
@@ -64,7 +65,7 @@ export function checkGuess(guess, game) // TODO: Finish this
         const letterBox = document.getElementById(`box-${game.guesses - 1}-${i}`);
         letterBox.textContent = guess[i];
 
-        // Compare against answer
+        // Compare against answer (Part 1 - Green letters)
         if (guess[i] == game.answer[i])
         {
             result[i] = 'R'; // right letter, right place
@@ -74,7 +75,12 @@ export function checkGuess(guess, game) // TODO: Finish this
             // Remove letter from answerCopy letters
             answerCopy = answerCopy.replace(guess[i], '');
         }
-        else if (game.answer.includes(guess[i]))
+    }
+
+    // Compare against answer (Part 2 - Yellow & Gray)
+    for (var i = 0; i < game.wordLength; i++)
+    {
+        if (game.answer.includes(guess[i]))
         {
             // If answerCopy still has the letter
             if (answerCopy.includes(guess[i]))
@@ -112,32 +118,6 @@ export function checkGuess(guess, game) // TODO: Finish this
 }
 
 
-// Create usedKeyboard
-export function createUsedKeyboard(game)
-{
-    // Create Used Letter Div
-    const usedBox = document.createElement('div');
-    usedBox.id = 'used-box';
-
-    for (var i = 0; i < game.usedKeyboard.length; i++)
-    {
-    const row = document.createElement('div');
-    row.className = 'used-letter-row';
-    row.id = `row${i}`;
-    for (var j = 0; j < game.usedKeyboard[i].length; j++)
-    {
-        const letter = document.createElement('div');
-        letter.className = 'used-letter-box';
-        letter.id = `used-${i}-${j}`;
-        letter.textContent = game.usedKeyboard[i][j];
-        row.appendChild(letter);
-    }
-    usedBox.appendChild(row);
-    }
-    return usedBox;
-}
-
-
 // Create Guess Board
 export function createGuessBoard(game)
 {
@@ -160,6 +140,71 @@ export function createGuessBoard(game)
         }
     }
     return boardDiv;
+}
+
+
+// Create Input Box
+export function createInputBox(game)
+{
+    const inputBox = document.createElement('div');
+    inputBox.id = 'input-box';
+
+    const messageBox = document.createElement('div')
+    messageBox.id = 'message';
+    inputBox.appendChild(messageBox);
+
+    const inputWrap = document.createElement('div');
+    inputWrap.id = 'input-wrap';
+    inputBox.appendChild(inputWrap);
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.id = 'input';
+    inputWrap.appendChild(input);
+
+    const inputBtn = document.createElement('button');
+    inputBtn.textContent = 'Submit';
+    inputBtn.id = 'input-btn';
+    inputWrap.appendChild(inputBtn);
+
+    // Add input listeners
+  input.addEventListener('keydown', (enter) =>
+  {
+    if (enter.key === 'Enter')
+      handleGuess(game);
+  });
+  inputBtn.addEventListener('click', () => 
+  {
+    handleGuess(game);
+  });
+
+    return inputBox;
+}
+
+
+// Create Used Keyboard
+export function createUsedKeyboard(game)
+{
+    // Create Used Letter Div
+    const usedBox = document.createElement('div');
+    usedBox.id = 'used-box';
+
+    for (var i = 0; i < game.usedKeyboard.length; i++)
+    {
+    const row = document.createElement('div');
+    row.className = 'used-letter-row';
+    row.id = `row${i}`;
+    for (var j = 0; j < game.usedKeyboard[i].length; j++)
+    {
+        const letter = document.createElement('div');
+        letter.className = 'used-letter-box';
+        letter.id = `used-${i}-${j}`;
+        letter.textContent = game.usedKeyboard[i][j];
+        row.appendChild(letter);
+    }
+    usedBox.appendChild(row);
+    }
+    return usedBox;
 }
 
 
