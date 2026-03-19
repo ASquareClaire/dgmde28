@@ -26,11 +26,14 @@ export function validateGuess(guess, wordLen)
 // R = right letter, right place
 // W = right letter, wrong place
 // X = not in word
-export function checkGuess(guess, game) // TODO: Finish this
+// TODO: Abstract win/lose checks and color boxes?
+// Check each letter of guess against answer
+export function checkGuess(guess, game)
 {
     var result = []
     guess = guess.toUpperCase();
     var answerCopy = game.answer;
+    // TODO: Move win/lose check to after color loop?
     // Check for win
     if (guess == game.answer)
     {
@@ -71,11 +74,6 @@ export function checkGuess(guess, game) // TODO: Finish this
                 result[i] = 'W'; // right letter, wrong place
                 answerCopy = answerCopy.replace(guess[i], '');
             }  
-            // If duplicate letter is not in answer:
-            else
-            {
-                result[i] = 'X'; // wrong letter
-            }
         }
         else 
         {
