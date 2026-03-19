@@ -3,23 +3,23 @@ import { Game } from './game.js';
 export function endGame(game, win)
 {
     const app = document.getElementById('app');
-    app.removeChild(document.getElementById('input-box'));
-    const board = document.getElementById('board');
+    //app.removeChild(document.getElementById('input-box'));
+    const inputBox = document.getElementById('input-box');
     if (win)
     {
-        board.innerHTML = '<h2>You win!</h2>';
+        inputBox.innerHTML = '<h2>You win!</h2>';
         game.player.totalWins++;
         console.log('Total Wins: ' + game.player.totalWins + ' -- Total Losses: ' + game.player.totalLosses);
     }
     else
     {
-        board.innerHTML = '<h2>You lose!</h2>';
+        inputBox.innerHTML = '<h2>You lose!</h2>';
         game.player.totalLosses++;
     }
     
     // Create new game btn
     const newGameBtn = createNewGameBtn(game.player);
-    app.appendChild(newGameBtn);
+    inputBox.appendChild(newGameBtn);
 
     // Display player stats
     const statsDiv = document.createElement('div');
@@ -61,20 +61,6 @@ export function checkGuess(guess, game)
     var result = []
     guess = guess.toUpperCase();
     var answerCopy = game.answer;
-    // TODO: Move win/lose check to after color loop?
-    // Check for win
-    if (guess == game.answer)
-    {
-        endGame(game, true);
-        return; // Is this correct / necessary?
-    }
-
-    // Check for loss
-    if (game.guesses == game.guessesMax)
-    {
-        endGame(game, false);
-        return;
-    }
 
     // Compare against answer (Part 1 - Green letters)
     for (var i = 0; i < game.wordLength; i++)
@@ -150,9 +136,30 @@ export function checkGuess(guess, game)
         }
     }
 
+    // Check for win or loss
+    checkWinLoss(guess, game);
+
     console.log('Guessed letters: ' + game.alphabetGuessed);
     console.log('result = ' + result);
     return result;    
+}
+
+
+function checkWinLoss(guess, game)
+{
+    // Check for win
+    if (guess == game.answer)
+    {
+        endGame(game, true);
+        return; // Is this correct / necessary?
+    }
+
+    // Check for loss
+    if (game.guesses == game.guessesMax)
+    {
+        endGame(game, false);
+        return;
+    }
 }
 
 
@@ -298,11 +305,11 @@ export function newGame(player)
     const boardDiv = createGuessBoard(game);
     app.appendChild(boardDiv);
 
-    // Add input and used letters
-    const inputBox = createInputBox(game)
-    app.appendChild(inputBox);
-
     // Create Used Letter Board
     const usedBox = createUsedKeyboard(game);
     app.appendChild(usedBox);
+
+    // Add input and used letters
+    const inputBox = createInputBox(game)
+    app.appendChild(inputBox);
 }
