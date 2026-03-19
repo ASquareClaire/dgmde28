@@ -1,12 +1,19 @@
-export function endGame(win)
+export function endGame(game, win)
 {
     const app = document.getElementById('app');
     app.removeChild(document.getElementById('input-box'));
     const board = document.getElementById('board');
     if (win)
+    {
         board.innerHTML = '<h2>You win!</h2>';
+        game.player.totalWins++;
+        console.log('Total Wins: ' + game.player.totalWins + ' -- Total Losses: ' + game.player.totalLosses);
+    }
     else
+    {
         board.innerHTML = '<h2>You lose!</h2>';
+        game.player.totalLosses++;
+    }
 }
 
 // Validate guess length and letters only
@@ -37,14 +44,14 @@ export function checkGuess(guess, game)
     // Check for win
     if (guess == game.answer)
     {
-        endGame(true);
+        endGame(game, true);
         return; // Is this correct / necessary?
     }
 
     // Check for loss
     if (game.guesses == game.guessesMax)
     {
-        endGame(false);
+        endGame(game, false);
         return;
     }
 
@@ -178,17 +185,31 @@ export function createInputBox(game)
     inputWrap.appendChild(inputBtn);
 
     // Add input listeners
-  input.addEventListener('keydown', (enter) =>
-  {
-    if (enter.key === 'Enter')
-      handleGuess(game);
-  });
-  inputBtn.addEventListener('click', () => 
-  {
-    handleGuess(game);
-  });
+    input.addEventListener('keydown', (enter) =>
+    {
+        if (enter.key === 'Enter')
+        handleGuess(game);
+    });
+    inputBtn.addEventListener('click', () => 
+    {
+        handleGuess(game);
+    });
 
     return inputBox;
+}
+
+
+// Create New Game button
+export function createNewGameBtn()
+{
+    const newGameBtn = document.createElement('div');
+    newGameBtn.id = 'new-game-btn';
+
+    // Add listener
+    newGameBtn.addEventListener('click', () =>
+    {
+        newGame();
+    })
 }
 
 
@@ -232,4 +253,26 @@ export function handleGuess(game)
       console.log('Guesses so far: ' + game.guesses);
       checkGuess(guess, game);
     }
+}
+
+// Start new game
+export function newGame(player)
+{
+  console.log('Starting new Game...');
+  
+  // Create new Game
+  const game = new Game(player);
+  game.answer = 'PRIDE'; // TODO: Hook up API
+
+  // Create board
+  const boardDiv = createGuessBoard(game);
+  app.appendChild(boardDiv);
+
+  // Add input and used letters
+  const inputBox = createInputBox(game)
+  app.appendChild(inputBox);
+
+  // Create Used Letter Board
+  const usedBox = createUsedKeyboard(game);
+  app.appendChild(usedBox);
 }

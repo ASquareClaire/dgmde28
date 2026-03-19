@@ -4,8 +4,8 @@ export class Player
     constructor
     (
         name = 'Player One',
-        totalWins,
-        totalLosses,
+        totalWins = 0,
+        totalLosses = 0,
     )
     {
         this.name = name,
