@@ -1,5 +1,51 @@
 import { Game } from './game.js';
 
+// Set up the XMLHttpRequest Object
+// TODO: Change for Wordle OR USE FETCH
+// res = fetch(" http://secretcheese.com/api_demo/members/demo/location.json ")
+// .then (res => res.text())
+// .then (data => console.log(data))
+// .catch (error => console.log(error))
+
+export function requestData() 
+{
+    var reqObj = new XMLHttpRequest();
+    if (! reqObj)
+    {
+        console.log("Unable to create HTTPRequest object"); 
+        return;
+    }
+    data = 'id:101'; //create some data
+    reqObj.onreadystatechange = getMyData(); //event handler
+    reqObj.open("POST", 'getData.php', true); //set up parameters
+    reqObj.send(data); //complete the request
+}
+
+// Check if 5-letter word is valid (FreeDictionary API)
+export async function isValidWord(word)
+{
+    var response = await fetch
+    (
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+    );
+    return response.ok; // Return bool 
+}
+
+// Event handler for API
+// TODO: Change for Wordle
+function getMyData()
+{
+    if(this.readyState==4 && this.status==200)
+    {
+        var data=this.responseText;
+        var info=JSON.parse(data);
+        for(i in info )
+        {
+            document.write(i + ':'+ info[i]); // TODO: Change this
+        }
+    }
+}
+
 export function endGame(game, win)
 {
     const app = document.getElementById('app');
