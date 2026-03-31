@@ -24,11 +24,19 @@ export function requestData()
 // Check if 5-letter word is valid (FreeDictionary API)
 export async function isValidWord(word)
 {
-    var response = await fetch
-    (
-        `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-    );
+    try
+    {
+        var response = await fetch
+        (
+            `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+        );
     return response.ok; // Return bool 
+    } 
+    catch (error) 
+    {
+        console.error("Dictionary API error:", error);
+        return true; // If no network response, treat as valid word
+    }
 }
 
 // Event handler for API
@@ -82,13 +90,19 @@ export function endGame(game, win)
     statsList.innerHTML += 'Total Losses: ' + game.player.totalLosses + '<br>';
 }
 
-// Validate guess length and letters only
-export function validateGuess(guess, wordLen)
+// Validate guess length, alpha only, and valid word
+export async function validateGuess(guess, wordLen)
 {
     const messageBox = document.getElementById('message');
     messageBox.innerHTML = '';
-    if (guess.length == wordLen && /^[A-Za-z]+$/.test(guess)) // Regex via geeksforgeeks.org
-        return true
+    if (guess.length == wordLen && /^[A-Za-z]+$/.test(guess)) // Regex alpha test via geeksforgeeks.org
+        if (await isValidWord(guess)) // Check for valid word
+            return true
+        else 
+        {
+            messageBox.innerHTML = 'Guess must be a valid word';
+            return false;
+        }  
     else if (guess.length != wordLen)
         messageBox.innerHTML = 'Guess must be exactly 5 letters';
     else 
@@ -316,18 +330,19 @@ export function createUsedKeyboard(game)
 
 
 // Validate and check guess
-export function handleGuess(game)
+export async function handleGuess(game)
 {
     const guess = input.value.trim();
     console.log('Guess: ' + guess);
     input.value = ''; // Clear input box
 
     // If guess is valid
-    if (validateGuess(guess, game.wordLength))
+    if (await validateGuess(guess, game.wordLength))
     {
-      game.guesses++;
-      console.log('Guesses so far: ' + game.guesses);
-      checkGuess(guess, game);
+        //await isValidWord(guess)
+        game.guesses++;
+        console.log('Guesses so far: ' + game.guesses);
+        checkGuess(guess, game);
     }
 }
 

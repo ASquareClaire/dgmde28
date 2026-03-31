@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <script>
+    function test() {
+
+      // create array 6 random numbers (using map)
+
+//var max = nums.reduce(((length, n) => max.length-1) , 0);
+//console.log(max); 
+//reduce(((sum, n) => sum+n), 0)
+
+kai = [63,77,49,87,76]
+gia = [94,78,69,88,62]
+jo = [85,98,70,100,87]
+
+function avg(grades)
+{
+    sum = 0
+    for (i = 0; i < grades.length; i++)
+    {
+        sum += grades[i]
+    }
+    return sum/grades.length;
+}
+// 1.
+document.write("Kai: " + avg(kai) + "<br>");
+document.write("Gia: " + avg(gia) + "<br>");
+document.write("Jo: " + avg(jo) + "<br>")
+// 2.
+var allGrades = [...kai, ...gia, ...jo];
+document.write("New array: " + allGrades + "<br>");
+// 3.
+
+//allGrades.sort();
+//document.write(allGrades + "<br>")
+document.write("Min: " + Math.min.apply(null,allGrades) + "<br>");
+document.write("Average: " + avg(allGrades));
+    }
+    test();
+  </script>
+  <!-- function Student(name, grades)
+{
+    this.name = name;
+    this.grades = grades;
+    this.gradeAverage = ()=> {
+        sum = 0;
+        for (i = 0; i < this.grades.length; i++)
+        {
+            sum += i;
+        }
+        return sum;
+    }
+    this.show = ()=> "The student " + this.name + " has a grade average of: " + this.gradeAverage();
+}
+// 2.
+jane = new Student("Jane", [20,40,60]);
+document.write(jane.gradeAverage);
+
+// 3.
+students = [
+{ 
+    Jane: new Student("Jane", [20,40,60])
+},
+{
+    Glen: new Student("Glen", [80, 63, 75])
+},
+{
+    Kris: new Student("Kris", [100, 80,95])
+}
+]
+// 3a.
+var report = document.getelementbyid("student_report");
+for (i = 0; i < students.length; i++)
+{
+    report.appendChild(students[i].show());
+} -->
+</body>
+</html>
