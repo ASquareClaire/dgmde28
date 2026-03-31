@@ -90,25 +90,7 @@ export function endGame(game, win)
     statsList.innerHTML += 'Total Losses: ' + game.player.totalLosses + '<br>';
 }
 
-// Validate guess length, alpha only, and valid word
-export async function validateGuess(guess, wordLen)
-{
-    const messageBox = document.getElementById('message');
-    messageBox.innerHTML = '';
-    if (guess.length == wordLen && /^[A-Za-z]+$/.test(guess)) // Regex alpha test via geeksforgeeks.org
-        if (await isValidWord(guess)) // Check for valid word
-            return true
-        else 
-        {
-            messageBox.innerHTML = 'Guess must be a valid word';
-            return false;
-        }  
-    else if (guess.length != wordLen)
-        messageBox.innerHTML = 'Guess must be exactly 5 letters';
-    else 
-        messageBox.innerHTML = 'Guess must be letters only';
-    return false
-}
+
 
 // R = right letter, right place
 // W = right letter, wrong place
@@ -328,6 +310,33 @@ export function createUsedKeyboard(game)
     return usedBox;
 }
 
+// TODO: Remove unnecessary exports
+// TODO: Fine tune debug mode
+// TODO: Clean up comments
+// Get random word
+export async function getRandomWord(game)
+{
+    // console.log('Trying to fetch a ' + game.wordLength + ' letter word');
+    try
+    {
+        const response = await fetch
+        (
+            // Note: This specific API pulls from old Wordle words - would need to use a different one for wordLength != 5
+            'https://wordlehints.co.uk/wp-json/wordlehint/v1/answers?per_page=200&order=asc'
+        );
+        const data = await response.json(); 
+        // console.log('API response:', data);
+        const words = data.results.map(entry => entry.answer);
+        return words[Math.floor(Math.random() * words.length)];
+
+    }
+    catch (error)
+    {
+        console.error('Random word API error:', error);
+        const fallbackWords = ['PRIDE', 'CRANE', 'AUDIO', 'STARE', 'PILOT', 'LEMON']; // Backup array of valid words
+        return fallbackWords[Math.floor(Math.random() * fallbackWords.length)]; // Return random backup word
+    }
+}
 
 // Validate and check guess
 export async function handleGuess(game)
@@ -347,13 +356,15 @@ export async function handleGuess(game)
 }
 
 // Start new game
-export function newGame(player)
+export async function newGame(player)
 {
     console.log('Starting new Game...');
     
     // Create new Game
     const game = new Game(player);
-    game.answer = 'PRIDE'; // TODO: Hook up API
+    // console.log('Looking for a ' + game.wordLength + ' letter word');
+    game.answer = await getRandomWord(game);
+    // TODO: If debugMode = true, console.log('Answer: ' + game answer)
     const app = document.getElementById('app');
     app.innerHTML = '';
 
@@ -372,4 +383,25 @@ export function newGame(player)
     // Add input and used letters
     const inputBox = createInputBox(game)
     app.appendChild(inputBox);
+}
+
+
+// Validate guess length, alpha only, and valid word
+export async function validateGuess(guess, wordLen)
+{
+    const messageBox = document.getElementById('message');
+    messageBox.innerHTML = '';
+    if (guess.length == wordLen && /^[A-Za-z]+$/.test(guess)) // Regex alpha test via geeksforgeeks.org
+        if (await isValidWord(guess)) // Check for valid word
+            return true
+        else 
+        {
+            messageBox.innerHTML = 'Guess must be a valid word';
+            return false;
+        }  
+    else if (guess.length != wordLen)
+        messageBox.innerHTML = 'Guess must be exactly 5 letters';
+    else 
+        messageBox.innerHTML = 'Guess must be letters only';
+    return false
 }
