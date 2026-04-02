@@ -147,6 +147,10 @@ p {
 #message:empty {
   display: none;
 }
+#new-game-btn
+{
+  margin-bottom: 15px;
+}
 .letter-box
 {
   height: 60px;

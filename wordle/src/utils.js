@@ -248,7 +248,7 @@ function endGame(game, win)
     // Display player stats
     const statsDiv = document.createElement('div');
     statsDiv.id = 'stats-div';
-    app.appendChild(statsDiv);
+    inputBox.appendChild(statsDiv);
     const statsTitle = document.createElement('div');
     statsTitle.id = 'stats-title';
     const statsList = document.createElement('div');
