@@ -1,3 +1,3 @@
 export default {
-  base: '/dgmd28/wordle/'
+  base: '/dgmd28e/wordle/'
 }
