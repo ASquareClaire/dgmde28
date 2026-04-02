@@ -2,8 +2,8 @@ import './style.css'
 import { Player } from './player.js'
 import { newGame } from './utils.js';
 
-// TODO: Create Win class? Convert to array with guess stat?
-
+// Create player
 const player = new Player();
 
+// Start new game
 newGame(player);

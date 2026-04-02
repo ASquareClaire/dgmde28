@@ -1,103 +1,24 @@
 import { Game } from './game.js';
 
-// Set up the XMLHttpRequest Object
-// TODO: Change for Wordle OR USE FETCH
 // res = fetch(" http://secretcheese.com/api_demo/members/demo/location.json ")
 // .then (res => res.text())
 // .then (data => console.log(data))
 // .catch (error => console.log(error))
 
-export function requestData() 
-{
-    var reqObj = new XMLHttpRequest();
-    if (! reqObj)
-    {
-        console.log("Unable to create HTTPRequest object"); 
-        return;
-    }
-    data = 'id:101'; //create some data
-    reqObj.onreadystatechange = getMyData(); //event handler
-    reqObj.open("POST", 'getData.php', true); //set up parameters
-    reqObj.send(data); //complete the request
-}
 
-// Check if 5-letter word is valid (FreeDictionary API)
-export async function isValidWord(word)
-{
-    try
-    {
-        var response = await fetch
-        (
-            `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-        );
-    return response.ok; // Return bool 
-    } 
-    catch (error) 
-    {
-        console.error("Dictionary API error:", error);
-        return true; // If no network response, treat as valid word
-    }
-}
 
-// Event handler for API
-// TODO: Change for Wordle
-function getMyData()
-{
-    if(this.readyState==4 && this.status==200)
-    {
-        var data=this.responseText;
-        var info=JSON.parse(data);
-        for(i in info )
-        {
-            document.write(i + ':'+ info[i]); // TODO: Change this
-        }
-    }
-}
 
-export function endGame(game, win)
-{
-    const app = document.getElementById('app');
-    const inputBox = document.getElementById('input-box');
-    if (win)
-    {
-        inputBox.innerHTML = '<h2>You win!</h2>';
-        game.player.totalWins++;
-        console.log('Total Wins: ' + game.player.totalWins + ' -- Total Losses: ' + game.player.totalLosses);
-    }
-    else
-    {
-        inputBox.innerHTML = '<h2>You lose!</h2>';
-        game.player.totalLosses++;
-    }
-    
-    // Create new game btn
-    const newGameBtn = createNewGameBtn(game.player);
-    inputBox.appendChild(newGameBtn);
-
-    // Display player stats
-    const statsDiv = document.createElement('div');
-    statsDiv.id = 'stats-div';
-    app.appendChild(statsDiv);
-    const statsTitle = document.createElement('div');
-    statsTitle.id = 'stats-title';
-    const statsList = document.createElement('div');
-    statsList.id = 'stats-list';
-    statsDiv.appendChild(statsTitle);
-    statsDiv.appendChild(statsList);
-    
-    statsTitle.innerHTML = 'Player Stats';
-    statsList.innerHTML += 'Total Wins: ' + game.player.totalWins + '<br>';
-    statsList.innerHTML += 'Total Losses: ' + game.player.totalLosses + '<br>';
-}
+// TODO: Fine tune debug mode
+// TODO: Clean up comments
+// TODO: Check deliverables list
 
 
 
 // R = right letter, right place
 // W = right letter, wrong place
 // X = not in word
-// TODO: Abstract color boxes?
 // Check each letter of guess against answer
-export function checkGuess(guess, game)
+function checkGuess(guess, game)
 {
     var result = []
     guess = guess.toUpperCase();
@@ -116,6 +37,7 @@ export function checkGuess(guess, game)
             answerCopy = answerCopy.replace(guess[i], '');
         }
     }
+
     // Compare against answer (Part 2 - Yellow & Gray letters)
     for (var i = 0; i < game.wordLength; i++)
     {
@@ -137,6 +59,7 @@ export function checkGuess(guess, game)
         console.log('Letter: ' + guess[i], 'answerCopy: ' + answerCopy)
     }
 
+    // TODO: Abstract color boxes?
     // Change box colors based on result
     for (var i = 0; i < game.wordLength; i++)
     {
@@ -164,14 +87,14 @@ export function checkGuess(guess, game)
         else if (result[i] == 'W')
         {
             letterBox.style.backgroundColor = '#b59f3b';
-            //If already green, do not overwrite color
+            // If already green, do not overwrite color
             if (!usedLetterBox.classList.contains('green'))
                 usedLetterBox.style.backgroundColor = '#b59f3b';
         }
         else 
         {
             letterBox.style.backgroundColor = 'grey';
-            //If already green, do not overwrite color
+            // If already green, do not overwrite color
             if (!usedLetterBox.classList.contains('green'))
                 usedLetterBox.style.backgroundColor = 'grey';
         }
@@ -205,7 +128,7 @@ function checkWinLoss(guess, game)
 
 
 // Create Guess Board
-export function createGuessBoard(game)
+function createGuessBoard(game)
 {
     // Create Guess Board
     const boardDiv = document.createElement('div');
@@ -230,7 +153,7 @@ export function createGuessBoard(game)
 
 
 // Create Input Box
-export function createInputBox(game)
+function createInputBox(game)
 {
     const inputBox = document.createElement('div');
     inputBox.id = 'input-box';
@@ -269,7 +192,7 @@ export function createInputBox(game)
 
 
 // Create New Game button
-export function createNewGameBtn(player)
+function createNewGameBtn(player)
 {
     const newGameBtn = document.createElement('button');
     newGameBtn.id = 'new-game-btn';
@@ -286,7 +209,7 @@ export function createNewGameBtn(player)
 
 
 // Create Used Keyboard
-export function createUsedKeyboard(game)
+function createUsedKeyboard(game)
 {
     // Create Used Letter Div
     const usedBox = document.createElement('div');
@@ -310,11 +233,47 @@ export function createUsedKeyboard(game)
     return usedBox;
 }
 
-// TODO: Remove unnecessary exports
-// TODO: Fine tune debug mode
-// TODO: Clean up comments
+
+// Display win/lose, new game button, and player stats
+function endGame(game, win)
+{
+    const app = document.getElementById('app');
+    const inputBox = document.getElementById('input-box');
+    if (win)
+    {
+        inputBox.innerHTML = '<h2>You win!</h2>';
+        game.player.totalWins++;
+        console.log('Total Wins: ' + game.player.totalWins + ' -- Total Losses: ' + game.player.totalLosses);
+    }
+    else
+    {
+        inputBox.innerHTML = '<h2>You lose!</h2>';
+        game.player.totalLosses++;
+    }
+    
+    // Create new game btn
+    const newGameBtn = createNewGameBtn(game.player);
+    inputBox.appendChild(newGameBtn);
+
+    // Display player stats
+    const statsDiv = document.createElement('div');
+    statsDiv.id = 'stats-div';
+    app.appendChild(statsDiv);
+    const statsTitle = document.createElement('div');
+    statsTitle.id = 'stats-title';
+    const statsList = document.createElement('div');
+    statsList.id = 'stats-list';
+    statsDiv.appendChild(statsTitle);
+    statsDiv.appendChild(statsList);
+    
+    statsTitle.innerHTML = 'Player Stats';
+    statsList.innerHTML += 'Total Wins: ' + game.player.totalWins + '<br>';
+    statsList.innerHTML += 'Total Losses: ' + game.player.totalLosses + '<br>';
+}
+
+
 // Get random word
-export async function getRandomWord(game)
+async function getRandomWord(game)
 {
     // console.log('Trying to fetch a ' + game.wordLength + ' letter word');
     try
@@ -339,7 +298,7 @@ export async function getRandomWord(game)
 }
 
 // Validate and check guess
-export async function handleGuess(game)
+async function handleGuess(game)
 {
     const guess = input.value.trim();
     console.log('Guess: ' + guess);
@@ -355,6 +314,26 @@ export async function handleGuess(game)
     }
 }
 
+
+// Check if 5-letter word is valid (FreeDictionary API)
+async function isValidWord(word)
+{
+    try
+    {
+        var response = await fetch
+        (
+            `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+        );
+    return response.ok; // Return bool 
+    } 
+    catch (error) 
+    {
+        console.error("Dictionary API error:", error);
+        return true; // If no network response, treat as valid word
+    }
+}
+
+
 // Start new game
 export async function newGame(player)
 {
@@ -362,9 +341,14 @@ export async function newGame(player)
     
     // Create new Game
     const game = new Game(player);
+    
+    // Get word via API
     // console.log('Looking for a ' + game.wordLength + ' letter word');
     game.answer = await getRandomWord(game);
-    // TODO: If debugMode = true, console.log('Answer: ' + game answer)
+    game.debugMode = true; // Turn on for debug mode
+    if (game.debugMode)
+        console.log('Answer: ' + game.answer);
+
     const app = document.getElementById('app');
     app.innerHTML = '';
 
@@ -387,12 +371,12 @@ export async function newGame(player)
 
 
 // Validate guess length, alpha only, and valid word
-export async function validateGuess(guess, wordLen)
+async function validateGuess(guess, wordLen)
 {
     const messageBox = document.getElementById('message');
     messageBox.innerHTML = '';
     if (guess.length == wordLen && /^[A-Za-z]+$/.test(guess)) // Regex alpha test via geeksforgeeks.org
-        if (await isValidWord(guess)) // Check for valid word
+        if (await isValidWord(guess)) // Check for valid word via API
             return true
         else 
         {

@@ -1,3 +1,4 @@
+// Game class
 export class Game
 {
     constructor
@@ -14,7 +15,8 @@ export class Game
             ['Q','W','E','R','T','Y','U','I','O','P'],
             ['A','S','D','F','G','H','J','K','L'],
             ['Z','X','C','V','B','N','M']
-        ]
+        ],
+        debugMode = false
     )
     {
         this.player = player,
@@ -24,6 +26,7 @@ export class Game
         this.guessesMax = guessesMax,
         this.guesses = guesses,
         this.answer = answer,
-        this.usedKeyboard = usedKeyboard
+        this.usedKeyboard = usedKeyboard,
+        this.debugMode = debugMode
     }
 }

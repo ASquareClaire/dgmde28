@@ -1,5 +1,6 @@
+// Player class, to hold stats
 export class Player
-// TODO: Add Win class?
+// TODO: Add Win class? Convert to array with guess stat?
 {
     constructor
     (
