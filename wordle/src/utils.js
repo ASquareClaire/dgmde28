@@ -1,7 +1,5 @@
 import { Game } from './game.js';
 
-// TODO: Check deliverables list
-
 // R = right letter, right place
 // W = right letter, wrong place
 // X = not in word
@@ -15,7 +13,7 @@ function checkGuess(guess, game)
     // Compare against answer (Part 1 - Green letters)
     for (var i = 0; i < game.wordLength; i++)
     {
-        // Add to guessed alphabet // TODO: Delete this if not needed
+        // Add to guessed alphabet
         if (!game.alphabetGuessed.includes(guess[i]))
             game.alphabetGuessed.push(guess[i]);
 
@@ -49,7 +47,7 @@ function checkGuess(guess, game)
             console.log('Letter: ' + guess[i], 'answerCopy: ' + answerCopy)
     }
 
-    // TODO: Abstract color boxes?
+    // TODO: Abstract color boxes to separate function?
     // Change box colors based on result
     for (var i = 0; i < game.wordLength; i++)
     {
@@ -124,22 +122,23 @@ function checkWinLoss(guess, game)
 // Create Guess Board
 function createGuessBoard(game)
 {
-    // Create Guess Board
     const boardDiv = document.createElement('div');
     boardDiv.id = 'board';
 
+    // For each guess allowed
     for (var i = 0; i < game.guessesMax; i++)
     {
+        // Create empty guess line
         const wordBox = document.createElement('div');
         wordBox.id = `word${i}`;
         wordBox.className = 'word-box'
         boardDiv.appendChild(wordBox);
         for (var j = 0; j < game.wordLength; j++)
         {
-        const letterBox = document.createElement('div');
-        letterBox.className = 'letter-box';
-        letterBox.id = `box-${i}-${j}`;
-        wordBox.appendChild(letterBox);
+            const letterBox = document.createElement('div');
+            letterBox.className = 'letter-box';
+            letterBox.id = `box-${i}-${j}`;
+            wordBox.appendChild(letterBox);
         }
     }
     return boardDiv;
@@ -235,6 +234,7 @@ function endGame(game, win)
 {
     const app = document.getElementById('app');
     const inputBox = document.getElementById('input-box');
+
     // Display win/lose text
     if (win)
     {
@@ -300,6 +300,7 @@ async function getRandomWord(game)
     }
 }
 
+
 // Validate and check guess
 async function handleGuess(game)
 {
@@ -347,8 +348,7 @@ export async function newGame(player)
     
     // Create new Game
     const game = new Game(player);
-    //game.debugMode = true; // Turn on for debug mode
-
+    //game.debugMode = true; // TURN ON FOR DEBUG MODE
     // Get word via API
     if (game.debugMode)
         console.log('Looking for a ' + game.wordLength + ' letter word');
