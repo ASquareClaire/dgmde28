@@ -350,13 +350,13 @@ export async function newGame(player)
     const boardDiv = createGuessBoard(game);
     app.appendChild(boardDiv);
 
-    // Create Used Letter Board
-    const usedBox = createUsedKeyboard(game);
-    app.appendChild(usedBox);
-
     // Add input and used letters
     const inputBox = createInputBox(game)
     app.appendChild(inputBox);
+
+    // Create Used Letter Board
+    const usedBox = createUsedKeyboard(game);
+    app.appendChild(usedBox);
 }
 
 
