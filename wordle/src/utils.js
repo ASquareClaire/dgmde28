@@ -46,7 +46,9 @@ function checkGuess(guess, game)
         {
             result[i] = 'X'; // wrong letter
         }
-        console.log('Letter: ' + guess[i], 'answerCopy: ' + answerCopy)
+
+        if (game.debugMode)
+            console.log('Letter: ' + guess[i], 'answerCopy: ' + answerCopy)
     }
 
     // TODO: Abstract color boxes?
@@ -93,8 +95,11 @@ function checkGuess(guess, game)
     // Check for win or loss
     checkWinLoss(guess, game);
 
-    console.log('Guessed letters: ' + game.alphabetGuessed);
-    console.log('result = ' + result);
+    if (game.debugMode)
+    {
+        console.log('Guessed letters: ' + game.alphabetGuessed);
+        console.log('result = ' + result);
+    }
     return result;    
 }
 
@@ -207,18 +212,20 @@ function createUsedKeyboard(game)
 
     for (var i = 0; i < game.usedKeyboard.length; i++)
     {
-    const row = document.createElement('div');
-    row.className = 'used-letter-row';
-    row.id = `row${i}`;
-    for (var j = 0; j < game.usedKeyboard[i].length; j++)
-    {
-        const letter = document.createElement('div');
-        letter.className = 'used-letter-box';
-        letter.id = `used-${i}-${j}`;
-        letter.textContent = game.usedKeyboard[i][j];
-        row.appendChild(letter);
-    }
-    usedBox.appendChild(row);
+        // Create rows
+        const row = document.createElement('div');
+        row.className = 'used-letter-row';
+        row.id = `row${i}`;
+        for (var j = 0; j < game.usedKeyboard[i].length; j++)
+        {
+            // Create letters
+            const letter = document.createElement('div');
+            letter.className = 'used-letter-box';
+            letter.id = `used-${i}-${j}`;
+            letter.textContent = game.usedKeyboard[i][j];
+            row.appendChild(letter);
+        }
+        usedBox.appendChild(row);
     }
     return usedBox;
 }
@@ -229,6 +236,7 @@ function endGame(game, win)
 {
     const app = document.getElementById('app');
     const inputBox = document.getElementById('input-box');
+    // Display win/lose text
     if (win)
     {
         inputBox.innerHTML = '<h2>You win!</h2>';
@@ -265,7 +273,9 @@ function endGame(game, win)
 // Get random word
 async function getRandomWord(game)
 {
-    // console.log('Trying to fetch a ' + game.wordLength + ' letter word');
+    if (game.debugMode)
+        console.log('Trying to fetch a ' + game.wordLength + ' letter word');
+
     try
     {
         const response = await fetch
@@ -274,11 +284,14 @@ async function getRandomWord(game)
             'https://wordlehints.co.uk/wp-json/wordlehint/v1/answers?per_page=200&order=asc'
         );
         const data = await response.json(); 
-        // console.log('API response:', data);
+
+        if (game.debugMode)
+            console.log('API response:', data);
+
         const words = data.results.map(entry => entry.answer);
         return words[Math.floor(Math.random() * words.length)];
-
     }
+    // If error, pull from backup array
     catch (error)
     {
         console.error('Random word API error:', error);
@@ -291,15 +304,18 @@ async function getRandomWord(game)
 async function handleGuess(game)
 {
     const guess = input.value.trim();
-    console.log('Guess: ' + guess);
+
+    if (game.debugMode)
+        console.log('Guess: ' + guess);
+
     input.value = ''; // Clear input box
 
     // If guess is valid
     if (await validateGuess(guess, game.wordLength))
     {
-        //await isValidWord(guess)
         game.guesses++;
-        console.log('Guesses so far: ' + game.guesses);
+        if (game.debugMode)
+            console.log('Guesses so far: ' + game.guesses);
         checkGuess(guess, game);
     }
 }
@@ -331,11 +347,13 @@ export async function newGame(player)
     
     // Create new Game
     const game = new Game(player);
-    
+    //game.debugMode = true; // Turn on for debug mode
+
     // Get word via API
-    // console.log('Looking for a ' + game.wordLength + ' letter word');
+    if (game.debugMode)
+        console.log('Looking for a ' + game.wordLength + ' letter word');
     game.answer = await getRandomWord(game);
-    game.debugMode = true; // Turn on for debug mode
+    
     if (game.debugMode)
         console.log('Answer: ' + game.answer);
 

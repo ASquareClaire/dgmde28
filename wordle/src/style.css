@@ -97,6 +97,7 @@ p {
   flex-direction: column;
   gap: 20px;
   box-sizing: border-box;
+  padding-bottom: 40px;
 }
 #board, #used-box
 {
