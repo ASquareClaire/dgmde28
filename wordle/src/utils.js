@@ -1,18 +1,8 @@
 import { Game } from './game.js';
 
-// res = fetch(" http://secretcheese.com/api_demo/members/demo/location.json ")
-// .then (res => res.text())
-// .then (data => console.log(data))
-// .catch (error => console.log(error))
-
-
-
-
 // TODO: Fine tune debug mode
 // TODO: Clean up comments
 // TODO: Check deliverables list
-
-
 
 // R = right letter, right place
 // W = right letter, wrong place
