@@ -1,7 +1,5 @@
 import { Game } from './game.js';
 
-// TODO: Fine tune debug mode
-// TODO: Clean up comments
 // TODO: Check deliverables list
 
 // R = right letter, right place
@@ -104,13 +102,14 @@ function checkGuess(guess, game)
 }
 
 
+// Check if game is finished
 function checkWinLoss(guess, game)
 {
     // Check for win
     if (guess == game.answer)
     {
         endGame(game, true);
-        return; // Is this correct / necessary?
+        return;
     }
 
     // Check for loss
@@ -246,6 +245,7 @@ function endGame(game, win)
     else
     {
         inputBox.innerHTML = '<h2>You lose!</h2>';
+        inputBox.innerHTML += 'Correct answer: ' + game.answer + '<br><br>';
         game.player.totalLosses++;
     }
     
