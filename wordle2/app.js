@@ -6,7 +6,7 @@
 // Instead, hard code 3 guesses (“might”, “flood”, “stray”) and then calculate and display results against an answer of “moody”
 // We will be looking for use of arrays. This assignment should NOT use JSX.
 import { Player } from './player.js'
-import { CreateGuessBoard, newGame } from './utils.js'
+import { CreateGuessBoard, CreateUsedKeyboard, newGame } from './utils.js'
 
 
 var hello = React.createElement("h1", null, "This is Reacting");
@@ -22,7 +22,7 @@ var wordle = React.createElement("div", null,
     [   
         React.createElement("h1", {key: "title"}, "WORDLE"),
         React.createElement(CreateGuessBoard, {id: "board", key: "board", game : game}),
-        React.createElement("div", {id: "used-letter-box", key: "used-letter-box"}, "I am a used letter board")
+        React.createElement(CreateUsedKeyboard, {id: "used-letter-box", key: "used-letter-box", game : game})
     ]);
 
 // Render App
