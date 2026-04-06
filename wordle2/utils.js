@@ -1,7 +1,7 @@
 import { Game } from './game.js'
 
 // Create Guess Board
-export function createGuessBoard({game})
+export function CreateGuessBoard({game})
 {
     // const boardDiv = document.createElement('div');
     // boardDiv.id = 'board';
@@ -12,17 +12,13 @@ export function createGuessBoard({game})
     // For each guess allowed
     for (var i = 0; i < game.guessesMax; i++)
     {
-        rows.push(React.createElement("div",
-        {
-            key: `word${i}`,
-            id: `word${i}`,
-            className: 'word-box'
-        }));
         //const wordBox = document.createElement('div');
         // wordBox.id = `word${i}`;
         // wordBox.key = `word${i}`;
         // wordBox.className = 'word-box'
         //boardDiv.appendChild(wordBox);
+
+        // Create row of letter boxes
         const letters = []
         for (var j = 0; j < game.wordLength; j++)
         {   
@@ -32,6 +28,13 @@ export function createGuessBoard({game})
                 id: `box-${i}-${j}`,
                 className: 'letter-box'
             }));
+        // Push row of letters into rows
+        rows.push(React.createElement("div",
+        {
+            key: `word${i}`,
+            id: `word${i}`,
+            className: 'word-box'
+        }, letters ));
             //const letterBox = document.createElement('div');
             // letterBox.className = 'letter-box';
             // letterBox.id = `box-${i}-${j}`;
@@ -40,8 +43,38 @@ export function createGuessBoard({game})
         }
     }
     //return boardDiv;
+    console.log(rows);
     return React.createElement("div", { id: "board" }, rows);
 }
+
+
+// Create Used Keyboard
+export function CreateUsedKeyboard(game)
+{
+    // Create Used Letter Div
+    const usedBox = document.createElement('div');
+    usedBox.id = 'used-box';
+
+    for (var i = 0; i < game.usedKeyboard.length; i++)
+    {
+        // Create rows
+        const row = document.createElement('div');
+        row.className = 'used-letter-row';
+        row.id = `row${i}`;
+        for (var j = 0; j < game.usedKeyboard[i].length; j++)
+        {
+            // Create letters
+            const letter = document.createElement('div');
+            letter.className = 'used-letter-box';
+            letter.id = `used-${i}-${j}`;
+            letter.textContent = game.usedKeyboard[i][j];
+            row.appendChild(letter);
+        }
+        usedBox.appendChild(row);
+    }
+    return usedBox;
+}
+
 
 // Create New Game
 // Start new game
@@ -71,41 +104,16 @@ export async function newGame(player)
     app.appendChild(titleBox);
 
     // Create board
-    const boardDiv = createGuessBoard(game);
-    app.appendChild(boardDiv);
+    //const boardDiv = CreateGuessBoard(game);
+    //app.appendChild(boardDiv);
 
     // Add input and used letters
     // const inputBox = createInputBox(game)
     // app.appendChild(inputBox);
 
     // Create Used Letter Board
-    const usedBox = createUsedKeyboard(game);
+    const usedBox = CreateUsedKeyboard(game);
     app.appendChild(usedBox);
-}
 
-// Create Used Keyboard
-export function createUsedKeyboard(game)
-{
-    // Create Used Letter Div
-    const usedBox = document.createElement('div');
-    usedBox.id = 'used-box';
-
-    for (var i = 0; i < game.usedKeyboard.length; i++)
-    {
-        // Create rows
-        const row = document.createElement('div');
-        row.className = 'used-letter-row';
-        row.id = `row${i}`;
-        for (var j = 0; j < game.usedKeyboard[i].length; j++)
-        {
-            // Create letters
-            const letter = document.createElement('div');
-            letter.className = 'used-letter-box';
-            letter.id = `used-${i}-${j}`;
-            letter.textContent = game.usedKeyboard[i][j];
-            row.appendChild(letter);
-        }
-        usedBox.appendChild(row);
-    }
-    return usedBox;
+    return game;
 }

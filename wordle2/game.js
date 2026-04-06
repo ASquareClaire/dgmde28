@@ -19,14 +19,14 @@ export class Game
         debugMode = false
     )
     {
-        this.player = player,
-        this.wordLength = wordLength,
-        this.alphabetFull = alphabetFull,
-        this.alphabetGuessed = alphabetGuessed,
-        this.guessesMax = guessesMax,
-        this.guesses = guesses,
-        this.answer = answer,
-        this.usedKeyboard = usedKeyboard,
+        this.player = player;
+        this.wordLength = wordLength;
+        this.alphabetFull = alphabetFull;
+        this.alphabetGuessed = alphabetGuessed;
+        this.guessesMax = guessesMax;
+        this.guesses = guesses;
+        this.answer = answer;
+        this.usedKeyboard = usedKeyboard;
         this.debugMode = debugMode
     }
 }
