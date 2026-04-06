@@ -1,0 +1,171 @@
+:root {
+    --text: #e5e7eb;
+    --bg: #121213;
+    --border: #3a3a3c;
+
+    font-family: system-ui, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+/* Wordle-Specific */
+#app {
+  align-items: center;
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  padding-bottom: 40px;
+}
+#board, #used-box
+{
+  height: fit-content;
+  width: fit-content;
+  outline: 1px solid #aa3bff;
+  padding: 15px;
+}
+.button
+{
+  align-items: center;
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  font-size: large;
+  font-weight: bold;
+  justify-content: center;
+  margin: 5px;
+  outline: 1px solid #f4f3ec;
+}
+#input-box
+{
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  outline: 1px solid #c084fc;
+  padding: 15px;
+  width: fit-content;
+}
+#input-wrap
+{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: fit-content;
+}
+#input-wrap:empty {
+  display: none;
+}
+#input, #input-btn
+{
+  width: 150px;
+}
+#message
+{
+  padding-bottom: 15px;
+}
+#message:empty {
+  display: none;
+}
+#new-game-btn
+{
+  margin-bottom: 15px;
+}
+.letter-box
+{
+  height: 60px;
+  width: 60px;
+  align-items: center;
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  font-size: large;
+  font-weight: bold;
+  justify-content: center;
+  margin: 5px;
+  outline: 1px solid #f4f3ec;
+}
+#stats-div
+{
+  align-items: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  padding: 15px;
+  outline: 1px solid #f4f3ec;
+}
+#stats-list
+{
+  text-align: left;
+}
+#stats-title
+{
+  font-size: large;
+  font-weight: bold;
+}
+.used-letter-row
+{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.used-letter-box
+{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  border-radius: 3px;
+  height: 40px;
+  width: 40px;
+  outline: 1px solid #f4f3ec;
+  margin: 5px;
+}
+.word-box
+{
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+}

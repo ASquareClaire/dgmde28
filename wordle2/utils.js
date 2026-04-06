@@ -28,6 +28,7 @@ export function CreateGuessBoard({game})
                 id: `box-${i}-${j}`,
                 className: 'letter-box'
             }));
+        }
         // Push row of letters into rows
         rows.push(React.createElement("div",
         {
@@ -40,7 +41,7 @@ export function CreateGuessBoard({game})
             // letterBox.id = `box-${i}-${j}`;
             // letterBox.key = `box-${i}-${j}`;
             //wordBox.appendChild(letterBox);
-        }
+        
     }
     //return boardDiv;
     console.log(rows);

@@ -21,7 +21,7 @@ const game = await newGame(player);
 var wordle = React.createElement("div", null,
     [   
         // TODO: Convert titleBox
-        React.createElement(CreateGuessBoard, {game : game}),
+        React.createElement(CreateGuessBoard, {id: "board", key: "board", game : game}),
         React.createElement("div", {id: "used-letter-box", key: "used-letter-box"}, "I am a used letter board")
     ]);
 
