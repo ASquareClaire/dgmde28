@@ -1,15 +1,8 @@
-:root {
-    --text: #e5e7eb;
-    --bg: #121213;
-    --border: #3a3a3c;
-
-    font-family: system-ui, sans-serif;
-    color: var(--text);
-    background: var(--bg);
-    -webkit-font-smoothing: antialiased;
-}
-
 body {
+  background-color: #121213;
+  border: #31313c;
+  color: #e5e7eb;
+  font-family: system-ui, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -50,7 +43,7 @@ p {
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
-  border-inline: 1px solid var(--border);
+  border: 1px solid #31313c;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
