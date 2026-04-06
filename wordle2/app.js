@@ -5,10 +5,9 @@
 // Since we have not yet covered event handling in React, do not attempt to make this interactive.  
 // Instead, hard code 3 guesses (“might”, “flood”, “stray”) and then calculate and display results against an answer of “moody”
 // We will be looking for use of arrays. This assignment should NOT use JSX.
-
-const answer = 'MOODY';
-const guesses = ['MIGHT', 'FLOOD', 'STRAY'];
-
+import './style.css'
+import { Player } from './player.js'
+import { Game } from './game.js'
 
 // Create Guess Board
 function createGuessBoard(game)
@@ -33,6 +32,46 @@ function createGuessBoard(game)
         }
     }
     return boardDiv;
+}
+
+// Create New Game
+// Start new game
+export async function newGame(player)
+{
+    console.log('Starting new Game...');
+    
+    // Create new Game
+    const game = new Game(player);
+    game.answer = 'MOODY';
+    game.guesses = ['MIGHT', 'FLOOD', 'STRAY'];
+
+    //game.debugMode = true; // TURN ON FOR DEBUG MODE
+    // Get word via API
+    if (game.debugMode)
+        console.log('Looking for a ' + game.wordLength + ' letter word');
+    game.answer = await getRandomWord(game);
+    
+    if (game.debugMode)
+        console.log('Answer: ' + game.answer);
+
+    const app = document.getElementById('app');
+    app.innerHTML = '';
+
+    const titleBox = document.createElement('div');
+    titleBox.innerHTML = '<h1>WORDLE</h1>';
+    app.appendChild(titleBox);
+
+    // Create board
+    const boardDiv = createGuessBoard(game);
+    app.appendChild(boardDiv);
+
+    // Add input and used letters
+    const inputBox = createInputBox(game)
+    app.appendChild(inputBox);
+
+    // Create Used Letter Board
+    const usedBox = createUsedKeyboard(game);
+    app.appendChild(usedBox);
 }
 
 // Create Used Keyboard
@@ -63,10 +102,20 @@ function createUsedKeyboard(game)
 }
 
 var hello = React.createElement("h1", null, "This is Reacting");
+// Create React divs
 var wordle = React.createElement("div", null,
     [   
         React.createElement("div", {id: "guess-board"}, "I am a guess board"),
         React.createElement("div", {id: "used-board"}, "I am a used letter board")
     ]);
+
+// Create Player
+const player = new Player();
+// Create New Game
+newGame(player);
+
+// Fill divs
+
+// Render App
 const root = ReactDOM.createRoot(document.querySelector("#app"));
 root.render(wordle);
