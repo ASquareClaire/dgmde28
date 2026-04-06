@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>react_class</title>
+	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script> 
+	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+	<style> 
+		h1.title {font-size: 38px; color: #4520db}
+	</style>
+</head>
+
+<body>
+	<div id="app"></div>
+	<script>
+		var hello = React.createElement("h1",{id: "main", className: "title"}, "This is Reacting");
+		var newStuff = React.createElement("div", null,
+							[	React.createElement("p", {className: "quote"}, "I hath been quoted"),
+								React.createElement("a", {href:"https://www.imdb.com", target: "_blank"}, "Movies")
+							]) // end div
+		const myroot = ReactDOM.createRoot(document.querySelector("#app"));
+		myroot.render(newStuff);
+	</script>
+	
+</body>
+</html>
