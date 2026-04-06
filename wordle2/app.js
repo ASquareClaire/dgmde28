@@ -25,6 +25,11 @@ var wordle = React.createElement("div", null,
         React.createElement(CreateUsedKeyboard, {id: "used-letter-box", key: "used-letter-box", game : game})
     ]);
 
+// TODO: update checkGuess
+// TODO: update handleGuess
+// TODO: update isValidWord?
+// TODO: update validateGuess?
+
 // Render App
 const root = ReactDOM.createRoot(document.querySelector("#app"));
 root.render(wordle);
