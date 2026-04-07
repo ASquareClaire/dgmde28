@@ -164,3 +164,16 @@ p {
   flex-direction: row;
   width: fit-content;
 }
+/* Letter box background colors */
+.green 
+{ 
+  background-color: #538d4e; 
+}
+.yellow 
+{ 
+  background-color: #b59f3b; 
+}
+.grey 
+{ 
+  background-color: #3a3a3c; 
+}
