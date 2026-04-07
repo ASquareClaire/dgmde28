@@ -1,10 +1,8 @@
 import { Game } from './game.js'
 
-
 // R = right letter, right place
 // W = right letter, wrong place
 // X = not in word
-// TODO: UPDATE to React
 // Check each letter of guess against answer
 function CheckGuess({guess, game})
 {
@@ -101,25 +99,13 @@ function CheckGuess({guess, game})
     return result;    
 }
 
-// TODO: Write function to CheckGuess for all game.guesses
-export function DisplayGuesses({game})
-{
-    for (var i = 0; i < game.guesses.length; i++)
-    {
-        CheckGuess(game.guesses[i]);
-    }
-}
-
 
 // Create Guess Board
 export function CreateGuessBoard({game})
 {
-    // const boardDiv = document.createElement('div');
-    // boardDiv.id = 'board';
-    // const boardDiv = document.getElementById('board');
-
     // Create empty guess lines
     const rows = [];
+
     // For each guess allowed
     for (var i = 0; i < game.guessesMax; i++)
     {
@@ -153,16 +139,12 @@ export function CreateGuessBoard({game})
             key: `word${i}`,
             id: `word${i}`,
             className: 'word-box'
-        }, letters ));
-            //const letterBox = document.createElement('div');
-            // letterBox.className = 'letter-box';
-            // letterBox.id = `box-${i}-${j}`;
-            // letterBox.key = `box-${i}-${j}`;
-            //wordBox.appendChild(letterBox);
-        
+        }, letters ));        
     }
-    //return boardDiv;
-    console.log(rows);
+
+    if (game.debugMode)
+        console.log(rows);
+
     return React.createElement("div", {id: "board"}, rows);
 }
 
@@ -170,7 +152,6 @@ export function CreateGuessBoard({game})
 // Create Used Keyboard
 export function CreateUsedKeyboard({game})
 {
-    console.log(game.usedKeyboard)
     // Map letters & colors based on guesses
     const letterColors = {};
     for (var g = 0; g < game.guesses.length; g++)
@@ -193,9 +174,6 @@ export function CreateUsedKeyboard({game})
     for (var i = 0; i < game.usedKeyboard.length; i++)
     {
         // Create rows
-        // const row = document.createElement('div');
-        // row.className = 'used-letter-row';
-        // row.id = `row${i}`;
         const letters = [];
         for (var j = 0; j < game.usedKeyboard[i].length; j++)
         {
@@ -208,11 +186,6 @@ export function CreateUsedKeyboard({game})
                 id: `used-${i}-${j}`,
                 className: `used-letter-box ${color}`
             }, letter));
-            // const letter = document.createElement('div');
-            // letter.className = 'used-letter-box';
-            // letter.id = `used-${i}-${j}`;
-            // letter.textContent = game.usedKeyboard[i][j];
-            // row.appendChild(letter);
         }
         // Push row of letters into rows
         rows.push(React.createElement("div",
@@ -221,32 +194,8 @@ export function CreateUsedKeyboard({game})
             id: `row${i}`,
             className: 'used-letter-row'
         }, letters ));
-        //usedBox.appendChild(row);
     }
-    //return usedBox;
     return React.createElement("div", {id: "used-box"}, rows)
-}
-
-
-// Validate and check guess
-// TODO: Delete this function for now?
-async function HandleGuess({game})
-{
-    const guess = input.value.trim();
-
-    if (game.debugMode)
-        console.log('Guess: ' + guess);
-
-    //input.value = ''; // Clear input box
-
-    // If guess is valid
-    // if (await validateGuess(guess, game.wordLength))
-    // {
-        game.guesses++;
-        if (game.debugMode)
-            console.log('Guesses so far: ' + game.guesses);
-        CheckGuess(guess, game);
-    //}
 }
 
 
@@ -259,34 +208,9 @@ export async function newGame(player)
     const game = new Game(player);
     game.answer = 'MOODY';
     game.guesses = ['MIGHT', 'FLOOD', 'STRAY'];
-
-    //game.debugMode = true; // TURN ON FOR DEBUG MODE
-    // Get word via API
-    // if (game.debugMode)
-    //     console.log('Looking for a ' + game.wordLength + ' letter word');
-    // game.answer = await getRandomWord(game);
     
     if (game.debugMode)
         console.log('Answer: ' + game.answer);
-
-    // const app = document.getElementById('app');
-    // app.innerHTML = '';
-
-    // const titleBox = document.createElement('div');
-    // titleBox.innerHTML = '<h1>WORDLE</h1>';
-    // app.appendChild(titleBox);
-
-    // Create board
-    //const boardDiv = CreateGuessBoard(game);
-    //app.appendChild(boardDiv);
-
-    // Add input and used letters
-    // const inputBox = createInputBox(game)
-    // app.appendChild(inputBox);
-
-    // Create Used Letter Board
-    // const usedBox = CreateUsedKeyboard(game);
-    // app.appendChild(usedBox);
 
     return game;
 }
