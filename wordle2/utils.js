@@ -47,50 +47,6 @@ function CheckGuess({guess, game})
             console.log('Letter: ' + guess[i], 'answerCopy: ' + answerCopy)
     }
 
-    // TODO: Abstract color boxes to separate function?
-    // Change box colors based on result
-    // for (var i = 0; i < game.wordLength; i++)
-    // {
-    //     // Find letter on used keyboard
-    //     var letterIndex = -1;
-    //     for (var row = 0; row < game.usedKeyboard.length; row++) 
-    //     {
-    //         letterIndex = game.usedKeyboard[row].indexOf(guess[i]);
-    //         if (letterIndex != -1)
-    //             break;
-    //     }
-
-    //     // Get boxes
-    //     const usedLetterBox = document.getElementById(`used-${row}-${letterIndex}`);
-    //     const letterBox = document.getElementById(`box-${game.guesses - 1}-${i}`);
-    //     letterBox.textContent = guess[i];
-
-    //     // Color based on result
-    //     if (result[i] == 'R')
-    //     {
-    //         letterBox.style.backgroundColor = '#538d4e';
-    //         usedLetterBox.style.backgroundColor = '#538d4e';
-    //         usedLetterBox.classList.add('green');
-    //     }
-    //     else if (result[i] == 'W')
-    //     {
-    //         letterBox.style.backgroundColor = '#b59f3b';
-    //         // If already green, do not overwrite color
-    //         if (!usedLetterBox.classList.contains('green'))
-    //             usedLetterBox.style.backgroundColor = '#b59f3b';
-    //     }
-    //     else 
-    //     {
-    //         letterBox.style.backgroundColor = 'grey';
-    //         // If already green, do not overwrite color
-    //         if (!usedLetterBox.classList.contains('green'))
-    //             usedLetterBox.style.backgroundColor = 'grey';
-    //     }
-    // }
-
-    // Check for win or loss
-    //checkWinLoss(guess, game);
-
     if (game.debugMode)
     {
         console.log('Guessed letters: ' + game.alphabetGuessed);

@@ -6,6 +6,8 @@ import { CreateGuessBoard, CreateUsedKeyboard, newGame } from './utils.js'
 const player = new Player();
 // Create New Game
 const game = await newGame(player);
+
+// game.debugMode = true; // UNCOMMENT FOR DEBUG MODE
 if (game.debugMode)
     console.log(game);
 
