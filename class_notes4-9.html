@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script> 
+	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- JSX line -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js">
+</script>
+</head>
+
+<title></title>
+
+<body>
+    <ul class="nav">
+        <li><a href='https://imdb.com' target='_blank'>Amelie</a></li>
+        <li><a href='https://imdb.com' target='_blank'>Blazing Saddles</a></li>
+        <li><a href='https://imdb.com' target='_blank'>There Will Be Blood</a></li>
+    </ul>
+    <hr>
+    <div id="nav-space"></div>
+
+<!-- text/babel for JSX -->
+<script type='text/babel'> 
+    // Create nav object
+    function NavItem(name, url, openExt = true)
+    {
+        this.name = name
+        this.url = url
+        this.openExt = openExt
+    }
+
+    var myNav = [
+        new NavItem('Amelie', 'https://imdb.com'),
+        new NavItem('Blazing Saddles', 'https://imdb.com'),
+        new NavItem('TWBB', 'https://imdb.com')
+    ]
+
+
+    //var navApp = React.createElement('ul', {className: 'nav'},
+    //
+    //    React.createElement('li', null, 
+    //        React.createElement('a', {href:myNav[0].url}, myNav[0].name)
+    //    ) // end li
+    //)   // end ul 
+
+    var navApp = React.createElement('ul', {className: 'nav'},
+        myNav.map((navThingy, i)=> {
+            if (navThingy.openExt) targetVal = '_blank'
+            else targetVal = '_self'
+        return React.createElement('li', {key: i}, 
+            React.createElement('a', {href:navThingy.url, target: targetVal}, navThingy.name)
+        ) // end li
+        }) // end map 
+        ) // end ul 
+    
+    // Create COMPONENT
+    function MyStaffMember(props)
+    {
+        return React.createElement('div', null,
+            React.createElement('h4', null, props.title),
+            React.createElement('h3', null, props.name)
+        )
+    }
+    var staff = React.createElement(MyStaffMember, {name: 'Arthur Morgan', title: 'Gunslinger'}, null);
+
+    const myroot = ReactDOM.createRoot(document.getElementById("nav-space"));
+    //myroot.render(navApp);
+    myroot.render(staff);
+
+</script>
+</body>
+</html>
