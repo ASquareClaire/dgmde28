@@ -55,7 +55,7 @@ function CheckGuess({guess, game})
     return result;    
 }
 
-
+// TODO: Convert to JSX Component
 // Create Guess Board
 export function CreateGuessBoard({game})
 {
@@ -105,6 +105,7 @@ export function CreateGuessBoard({game})
 }
 
 
+// TODO: Convert to JSX Component
 // Create Used Keyboard
 export function CreateUsedKeyboard({game})
 {
@@ -155,6 +156,7 @@ export function CreateUsedKeyboard({game})
 }
 
 
+// TODO: JSX Component?
 // Create New Game
 export async function newGame(player)
 {

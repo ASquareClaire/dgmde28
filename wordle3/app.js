@@ -1,6 +1,12 @@
 import { Player } from './player.js'
 import { CreateGuessBoard, CreateUsedKeyboard, newGame } from './utils.js'
 
+// TODO: Create Components
+// Letter Box?
+// Guess Row (of Letter Boxes)?
+// Board
+// Used Letter Board
+// TODO: Update var wordle in app.js
 
 // Create Player
 const player = new Player();
