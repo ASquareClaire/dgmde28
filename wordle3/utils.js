@@ -4,7 +4,7 @@ import { Game } from './game.js'
 // W = right letter, wrong place
 // X = not in word
 // Check each letter of guess against answer
-function CheckGuess({guess, game})
+export function CheckGuess({guess, game})
 {
     var result = []
     guess = guess.toUpperCase();
@@ -82,12 +82,21 @@ export function CreateGuessBoard({game})
             else if (result[j] == 'X')
                 className += ' grey';
 
-            letters.push(React.createElement("div", 
+            letters.push(
+                React.createElement("div", 
             {
                 key: `box-${i}-${j}`,
                 id: `box-${i}-${j}`,
                 className: className
-            }, guess[j] || '')); // Fill letter box with letter, or empty
+            }, guess[j] || '')
+            // <div 
+            //     key={`box-${i}-${j}`} 
+            //     id={`box-${i}-${j}`} 
+            //     classname={className}
+            // >
+            //     {guess[j] || ''}
+            // </div>
+            ); // Fill letter box with letter, or empty
         }
         // Push row of letters into rows
         rows.push(React.createElement("div",
