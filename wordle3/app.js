@@ -1,7 +1,7 @@
 import { Player } from './player.js'
 import { CheckGuess, CreateUsedKeyboard, newGame } from './utils.js'
 
-// TODO: Convert to JSX Component
+
 // Create Guess Board
 function CreateGuessBoard({game})
 {
@@ -35,28 +35,38 @@ function CreateGuessBoard({game})
             //     id: `box-${i}-${j}`,
             //     className: className
             // }, guess[j] || '')
-            <div 
-                key={`box-${i}-${j}`} 
-                id={`box-${i}-${j}`} 
-                className={className}
-            >
-                {guess[j] || ''}
-            </div>
+                <div 
+                    key={`box-${i}-${j}`} 
+                    id={`box-${i}-${j}`} 
+                    className={className}
+                >
+                    {guess[j] || ''}
+                </div>
             ); // Fill letter box with letter, or empty
         }
         // Push row of letters into rows
-        rows.push(React.createElement("div",
-        {
-            key: `word${i}`,
-            id: `word${i}`,
-            className: 'word-box'
-        }, letters ));        
+        rows.push(
+            <div
+                key={`word${i}`}
+                id={`word${i}`}
+                className={'word-box'}
+            >
+                {letters}
+            </div>
+        //     React.createElement("div",
+        // {
+        //     key: `word${i}`,
+        //     id: `word${i}`,
+        //     className: 'word-box'
+        // }, letters )
+        );        
     }
 
     if (game.debugMode)
         console.log(rows);
 
-    return React.createElement("div", {id: "board"}, rows);
+    return <div id={'board'}>{rows}</div>
+    //return React.createElement("div", {id: "board"}, rows);
 }
 
 
