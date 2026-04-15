@@ -56,57 +56,6 @@ export function CheckGuess({guess, game})
 }
 
 
-// TODO: Convert to JSX Component
-// Create Used Keyboard
-export function CreateUsedKeyboard({game})
-{
-    // Map letters & colors based on guesses
-    const letterColors = {};
-    for (var g = 0; g < game.guesses.length; g++)
-    {
-        const result = CheckGuess({guess: game.guesses[g], game});
-        const guess = game.guesses[g];
-        for (var i = 0; i < guess.length; i++)
-        {
-            // Color logic: Green > yellow > grey
-            if (result[i] == 'R') 
-                letterColors[guess[i]] = 'green';
-            else if (result[i] == 'W' && letterColors[guess[i]] != 'green')
-                letterColors[guess[i]] = 'yellow';
-            else if (!letterColors[guess[i]])
-                letterColors[guess[i]] = 'grey';
-        }
-    }
-
-    const rows = [];
-    for (var i = 0; i < game.usedKeyboard.length; i++)
-    {
-        // Create rows
-        const letters = [];
-        for (var j = 0; j < game.usedKeyboard[i].length; j++)
-        {
-            // Create letters
-            const letter = game.usedKeyboard[i][j];
-            const color = letterColors[letter] || '';
-            letters.push(React.createElement("div", 
-            {
-                key: `used-${i}-${j}`,
-                id: `used-${i}-${j}`,
-                className: `used-letter-box ${color}`
-            }, letter));
-        }
-        // Push row of letters into rows
-        rows.push(React.createElement("div",
-        {
-            key: `row${i}`,
-            id: `row${i}`,
-            className: 'used-letter-row'
-        }, letters ));
-    }
-    return React.createElement("div", {id: "used-box"}, rows)
-}
-
-
 // TODO: JSX Component?
 // Create New Game
 export async function newGame(player)
