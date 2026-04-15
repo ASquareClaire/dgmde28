@@ -55,64 +55,6 @@ export function CheckGuess({guess, game})
     return result;    
 }
 
-// TODO: Convert to JSX Component
-// Create Guess Board
-export function CreateGuessBoard({game})
-{
-    // Create empty guess lines
-    const rows = [];
-
-    // For each guess allowed
-    for (var i = 0; i < game.guessesMax; i++)
-    {
-        // Check for guess in array - process guess or leave empty
-        const guess = game.guesses[i] || ''; 
-        const result = guess ? CheckGuess({guess, game}) : [];
-        
-        // Create row of letter boxes
-        const letters = [];
-        for (var j = 0; j < game.wordLength; j++)
-        {   
-            // Build className with result
-            var className = 'letter-box';
-            if (result[j] == 'R')
-                className += ' green';
-            else if (result[j] == 'W')
-                className += ' yellow';
-            else if (result[j] == 'X')
-                className += ' grey';
-
-            letters.push(
-                React.createElement("div", 
-            {
-                key: `box-${i}-${j}`,
-                id: `box-${i}-${j}`,
-                className: className
-            }, guess[j] || '')
-            // <div 
-            //     key={`box-${i}-${j}`} 
-            //     id={`box-${i}-${j}`} 
-            //     classname={className}
-            // >
-            //     {guess[j] || ''}
-            // </div>
-            ); // Fill letter box with letter, or empty
-        }
-        // Push row of letters into rows
-        rows.push(React.createElement("div",
-        {
-            key: `word${i}`,
-            id: `word${i}`,
-            className: 'word-box'
-        }, letters ));        
-    }
-
-    if (game.debugMode)
-        console.log(rows);
-
-    return React.createElement("div", {id: "board"}, rows);
-}
-
 
 // TODO: Convert to JSX Component
 // Create Used Keyboard
