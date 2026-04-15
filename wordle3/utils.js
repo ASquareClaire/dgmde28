@@ -56,7 +56,6 @@ export function CheckGuess({guess, game})
 }
 
 
-// TODO: JSX Component?
 // Create New Game
 export async function newGame(player)
 {

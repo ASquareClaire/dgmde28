@@ -2,12 +2,7 @@ import { Player } from './player.js'
 import { CheckGuess, newGame } from './utils.js'
 
 
-// TODO: Create Components
-// Letter Box?
-// Guess Row (of Letter Boxes)?
-// Used Letter Board
-
-// Create Guess Board
+// Create Guess Board Component
 function CreateGuessBoard({game})
 {
     // Create empty guess lines
@@ -34,12 +29,6 @@ function CreateGuessBoard({game})
                 className += ' grey';
 
             letters.push(
-            //     React.createElement("div", 
-            // {
-            //     key: `box-${i}-${j}`,
-            //     id: `box-${i}-${j}`,
-            //     className: className
-            // }, guess[j] || '')
                 <div 
                     key={`box-${i}-${j}`} 
                     id={`box-${i}-${j}`} 
@@ -58,12 +47,6 @@ function CreateGuessBoard({game})
             >
                 {letters}
             </div>
-        //     React.createElement("div",
-        // {
-        //     key: `word${i}`,
-        //     id: `word${i}`,
-        //     className: 'word-box'
-        // }, letters )
         );        
     }
 
@@ -71,12 +54,10 @@ function CreateGuessBoard({game})
         console.log(rows);
 
     return <div id={'board'}>{rows}</div>
-    //return React.createElement("div", {id: "board"}, rows);
 }
 
 
-// TODO: Convert to JSX Component
-// Create Used Keyboard
+// Create Used Keyboard Component
 function CreateUsedKeyboard({game})
 {
     // Map letters & colors based on guesses
@@ -108,12 +89,6 @@ function CreateUsedKeyboard({game})
             const letter = game.usedKeyboard[i][j];
             const color = letterColors[letter] || '';
             letters.push(
-            //     React.createElement("div", 
-            // {
-            //     key: `used-${i}-${j}`,
-            //     id: `used-${i}-${j}`,
-            //     className: `used-letter-box ${color}`
-            // }, letter)
                 <div
                     key={`used-${i}-${j}`}
                     id={`used-${i}-${j}`}
@@ -125,12 +100,6 @@ function CreateUsedKeyboard({game})
         }
         // Push row of letters into rows
         rows.push(
-        //     React.createElement("div",
-        // {
-        //     key: `row${i}`,
-        //     id: `row${i}`,
-        //     className: 'used-letter-row'
-        // }, letters )
             <div 
                 key={`row${i}`}
                 id={`row${i}`}
@@ -141,9 +110,7 @@ function CreateUsedKeyboard({game})
         );
     }
     return <div id={"used-box"}>{rows}</div>
-    //return React.createElement("div", {id: "used-box"}, rows)
 }
-
 
 
 // Create Player
@@ -154,14 +121,6 @@ const game = await newGame(player);
 // game.debugMode = true; // UNCOMMENT FOR DEBUG MODE
 if (game.debugMode)
     console.log(game);
-
-// Create React divs
-// var wordle = React.createElement("div", null,
-//     [   
-//         React.createElement("h1", {key: "title"}, "WORDLE"),
-//         React.createElement(CreateGuessBoard, {id: "board", key: "board", game : game}),
-//         React.createElement(CreateUsedKeyboard, {id: "used-letter-box", key: "used-letter-box", game : game})
-//     ]);
 
 // Create JSX divs
 var wordle = 
