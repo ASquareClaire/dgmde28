@@ -1,9 +1,21 @@
-.small-box {
-  height: 40px;
-  width: 40px;
-  border: 2px solid white;
+.big-box{
+  border: 5px solid white;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
 }
 
+.row {
+  display: inline-flex;
+}
+
+.small-box {
+  height: 100px;
+  width: 100px;
+  border: 2px solid black;
+}
+
+/* Colors */
 .black-box {
   background-color: black;
 }
