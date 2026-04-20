@@ -5,24 +5,35 @@
 import './App.css'
 
 // TODO: Make box component
-function Box()
+function Box(number)
 {
-
+  return <div id={number} className={'smallBox'}></div>
 }
 
 // TODO: Make row component
-function Row()
+function Row(boxes)
 {
-  
+  var row = [];
+
+  // Add boxes to row
+  for (var i = 0; i < boxes; i++)
+    row.push(Box(i))
+
+  return <div id={'row'}>{row}</div>
 }
 
 // TODO: Make box component
 function BigBox()
 {
+  const rows = 3;
   const bigBox = []
-  // TODO: Add rows x3
-    // TODO: Add boxes x3 (assign numbers)
+  // Add rows
+  for (var i = 0; i < rows; i++)
+    // Add boxes x3 (assign numbers)
+    bigBox.push(Row(rows));
+
   // TODO: Assign colors (black, blue, red, gold)
+  var colors = ['black', 'blue', 'red', 'gold'];
   return <div>{bigBox}</div>
 }
 
