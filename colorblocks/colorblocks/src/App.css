@@ -1,3 +1,26 @@
+.small-box {
+  height: 40px;
+  width: 40px;
+  border: 2px solid white;
+}
+
+.black-box {
+  background-color: black;
+}
+
+.blue-box {
+  background-color: blue;
+}
+
+.red-box {
+  background-color: red;
+}
+
+.gold-box {
+  background-color: goldenrod;
+}
+
+/* Vite stuff */
 .counter {
   font-size: 16px;
   padding: 5px 10px;
