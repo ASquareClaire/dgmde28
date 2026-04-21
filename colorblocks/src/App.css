@@ -17,20 +17,21 @@
 
 /* Colors */
 .black-box {
-  background-color: black;
+  background-color: #000000;
 }
 
 .blue-box {
-  background-color: blue;
+  background-color: #0000ff;
 }
 
 .red-box {
-  background-color: red;
+  background-color: #ff0000;
 }
 
 .gold-box {
-  background-color: goldenrod;
+  background-color: #daa520;
 }
+
 
 /* Vite stuff */
 .counter {
