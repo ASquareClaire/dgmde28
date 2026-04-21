@@ -21,7 +21,7 @@
   font-size: 60px;
 }
 .small-box:hover{
-  opacity: 30%;
+  opacity: .3;
 }
 
 /* Colors */
