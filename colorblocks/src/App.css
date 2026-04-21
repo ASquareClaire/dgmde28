@@ -10,9 +10,18 @@
 }
 
 .small-box {
+  border: 2px solid black;
   height: 100px;
   width: 100px;
-  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 60px;
+}
+.small-box:hover{
+  opacity: 30%;
 }
 
 /* Colors */
