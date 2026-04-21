@@ -1,45 +1,41 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from './assets/vite.svg'
-// import heroImg from './assets/hero.png'
 import './App.css'
 
 // TODO: Make box component
-function Box(number)
+function Box({number})
 {
   const colorMap = 
   {
-    7: 'black-box', 8: 'blue-box', 9: 'red-box',
-    4: 'gold-box',  5: 'black-box', 6: 'blue-box',
-    1: 'red-box',   2: 'gold-box',  3: 'black-box',
+    7: 'black', 8: 'blue', 9: 'red',
+    4: 'gold',  5: 'black', 6: 'blue',
+    1: 'red',   2: 'gold',  3: 'black',
   };
   var color = colorMap[number];
-  //const colorClasses = ['black-box', 'blue-box', 'red-box', 'gold-box'];
   return <div 
             id={number} 
-            key={number}
+            //key={number}
             className={`small-box ${color}`}
+            onClick={() => alert(number)}
         >
             {number}
         </div>
 }
 
 // TODO: Make row component
-function Row(boxes, rowNum, startingNum)
+function Row({boxes, rowNum, startingNum})
 {
   var row = [];
 
   // Add boxes to row
   for (var i = 0; i < boxes; i++)
   {
-    row.push(Box(startingNum));
+    row.push(<Box key={startingNum} number={startingNum} />)
     console.log('startingNum: ' + startingNum)
     startingNum++;
   }
 
   return <div 
             id={`row${rowNum}`}
-            key={`row${rowNum}`}
+            //key={`row${rowNum}`}
             className={'row'}
         >
             {row}
@@ -56,7 +52,7 @@ function BigBox()
   for (var i = 0; i < rows; i++)
   {
     // Add boxes x3 (assign numbers)
-    bigBox[rows - 1 - i] = (Row(rows, i, startingNum));
+    bigBox[rows - 1 - i] = <Row key={i} boxes={rows} startingNum={startingNum} />
     startingNum += 3;
   }
 
